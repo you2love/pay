@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付网关 - 支付学习网</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">💳 支付学习网</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="basics.html">支付基础</a></li>
+                <li><a href="gateways.html" class="active">支付网关</a></li>
+                <li><a href="simulator.html">支付模拟</a></li>
+                <li><a href="security.html">安全机制</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <div class="page-header">
+        <div class="container">
+            <h1>支付网关技术</h1>
+            <p>学习主流支付网关技术和集成方案</p>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <main>
+        <div class="container">
+            <div class="content">
+                <h2>🌉 什么是支付网关？</h2>
+                <p>支付网关是连接商户系统和金融机构的中介服务，负责处理在线支付交易、验证交易信息、管理支付流程。它为商户提供统一的API接口，屏蔽了不同银行和支付系统的复杂性。</p>
+            </div>
+
+            <div class="content">
+                <h2>🏢 主流支付网关</h2>
+
+                <h3>支付宝</h3>
+                <p>中国最大的第三方支付平台，持续引领支付技术创新。</p>
+                <ul>
+                    <li><strong>优势</strong>：用户基数超10亿、AI风控系统、生物识别支付、无感支付</li>
+                    <li><strong>最新功能</strong>：刷脸支付3.0、语音支付、区块链跨境汇款、数字人民币集成、元宇宙支付场景</li>
+                    <li><strong>传统功能</strong>：即时到账支付、手机网站支付、APP 支付、扫码支付、当面付</li>
+                </ul>
+
+                <h3>微信支付</h3>
+                <p>基于微信生态的超级应用支付解决方案。</p>
+                <ul>
+                    <li><strong>优势</strong>：月活用户超13亿、视频号电商支付、小程序生态完善、私域流量转化</li>
+                    <li><strong>最新功能</strong>：数字人民币钱包、刷掌支付、跨境支付（东南亚、欧洲）、AI客服自动退款</li>
+                    <li><strong>传统功能</strong>：公众号支付、小程序支付、H5 支付、Native 扫码支付、APP 支付</li>
+                </ul>
+
+                <h3>Stripe</h3>
+                <p>全球领先的金融基础设施平台，持续扩展支付生态系统。</p>
+                <ul>
+                    <li><strong>优势</strong>：135+国家覆盖、AI反欺诈、实时汇率、开发者友好</li>
+                    <li><strong>最新功能</strong>：Stripe Identity AI身份验证、Web3加密货币支付、订阅智能推荐、自动化税务合规</li>
+                    <li><strong>核心功能</strong>：信用卡支付、借记卡支付、Apple Pay / Google Pay、订阅计费、多币种支持、全球收款</li>
+                </ul>
+
+                <h3>PayPal</h3>
+                <p>全球领先的数字支付平台，持续增强跨境支付能力。</p>
+                <ul>
+                    <li><strong>优势</strong>：4亿+活跃用户、买家保护机制、即时全球转账、支持190+国家</li>
+                    <li><strong>最新功能</strong>：PYUSD稳定币支付、AI智能客服、加密货币自动兑换、区块链结算网络</li>
+                    <li><strong>核心功能</strong>：标准支付、订阅支付、快速结账、分期付款（BNPL）、发票支付</li>
+                </ul>
+
+                <h3>新兴支付平台</h3>
+
+                <h4>数字人民币（e-CNY）</h4>
+                <p>中国央行数字货币，已在全国范围普及。</p>
+                <ul>
+                    <li><strong>特点</strong>：双离线支付、可控匿名、零手续费、法偿性</li>
+                    <li><strong>应用场景</strong>：政务缴费、公共交通、零售消费、跨境支付（已接入香港、澳门、泰国）</li>
+                </ul>
+
+                <h4>Web3支付方案</h4>
+                <p>区块链原生支付解决方案，逐渐主流化。</p>
+                <ul>
+                    <li><strong>代表平台</strong>：Coinbase Commerce、MetaMask、WalletConnect</li>
+                    <li><strong>支付资产</strong>：USDC、USDT、PYUSD、BTC、ETH、稳定币</li>
+                    <li><strong>优势</strong>：全球即时结算、低费率、去中心化、智能合约自动执行</li>
+                </ul>
+
+                <h4>BNPL（先买后付）平台</h4>
+                <p>主流的分期付款解决方案。</p>
+                <ul>
+                    <li><strong>代表平台</strong>：Klarna、Afterpay、Affirm、花呗分期</li>
+                    <li><strong>特点</strong>：0利率分期、即时审批、提升转化率30%+</li>
+                    <li><strong>目标用户</strong>：Z世代、年轻消费者、中低收入群体</li>
+                </ul>
+            </div>
+
+            <div class="content">
+                <h2>🔧 网关集成步骤</h2>
+
+                <h3>步骤 1：注册账号</h3>
+                <p>在支付网关平台注册商户账号，完成企业认证和资质审核。</p>
+                <p><strong>所需材料：</strong>营业执照、法人身份证、银行账户信息、商户照片等</p>
+
+                <h3>步骤 2：获取密钥</h3>
+                <p>在商户后台获取 API 密钥、商户 ID 等必要信息。</p>
+                <p><strong>关键信息：</strong>商户 ID（Partner ID）、API 密钥（API Key）、应用 ID（App ID）、公钥/私钥对</p>
+
+                <h3>步骤 3：接入 SDK</h3>
+                <p>根据业务类型选择合适的 SDK，集成到系统中。</p>
+                <p><strong>SDK 类型：</strong>服务端 SDK（后端集成）、客户端 SDK（移动端）、Web SDK（网站端）、小程序 SDK</p>
+
+                <h3>步骤 4：测试联调</h3>
+                <p>使用沙箱环境进行测试，验证支付流程是否正常。</p>
+                <p><strong>测试要点：</strong>下单接口调用、支付回调处理、退款流程测试、异常场景处理</p>
+            </div>
+
+            <div class="content">
+                <h2>⚙️ 接口设计要点</h2>
+                <ul>
+                    <li><strong>安全签名</strong>：所有请求必须包含签名验证，防止数据被篡改。常用签名算法：MD5、RSA、HMAC-SHA256。</li>
+                    <li><strong>订单号设计</strong>：使用唯一订单号，建议格式：商户ID + 时间戳 + 随机数。确保全局唯一且可追溯。</li>
+                    <li><strong>异步通知</strong>：支付结果通过异步回调通知，需要验证通知来源的真实性，并处理重复通知。</li>
+                    <li><strong>超时处理</strong>：设置合理的订单超时时间，未支付订单需要自动关闭，避免资源占用。</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 支付学习网. 仅供学习使用.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

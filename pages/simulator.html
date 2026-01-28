@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付模拟 - 支付学习网</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">💳 支付学习网</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="basics.html">支付基础</a></li>
+                <li><a href="gateways.html">支付网关</a></li>
+                <li><a href="simulator.html" class="active">支付模拟</a></li>
+                <li><a href="security.html">安全机制</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <div class="page-header">
+        <div class="container">
+            <h1>支付模拟器</h1>
+            <p>通过交互式模拟器体验真实的支付流程</p>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <main>
+        <div class="container">
+            <div class="simulator-container">
+                <!-- 支付表单 -->
+                <div class="simulator-form">
+                    <h2>💳 发起支付</h2>
+                    <div id="alert-message"></div>
+
+                    <form id="payment-form">
+                        <div class="form-group">
+                            <label for="amount">支付金额（元）</label>
+                            <input
+                                type="number"
+                                id="amount"
+                                class="form-control"
+                                step="0.01"
+                                min="0.01"
+                                placeholder="请输入支付金额"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="payment-method">支付方式</label>
+                            <select id="payment-method" class="form-control">
+                                <option value="alipay">支付宝</option>
+                                <option value="wechat">微信支付</option>
+                                <option value="digitalrmb">数字人民币（e-CNY）</option>
+                                <option value="biometric">生物识别支付（刷脸/刷掌）</option>
+                                <option value="web3">Web3加密货币支付</option>
+                                <option value="bnpl">先买后付（BNPL）</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            立即支付
+                        </button>
+                    </form>
+
+                    <div class="alert alert-info" style="margin-top: 20px;">
+                        <strong>📝 模拟说明</strong>
+                        <ul style="margin-top: 10px; margin-bottom: 0;">
+                            <li>这是一个前端模拟器，不涉及真实资金</li>
+                            <li>支付成功率为 80%，失败率为 20%</li>
+                            <li>支持多种支付方式模拟</li>
+                            <li>所有交易数据仅存储在本地内存中</li>
+                            <li>刷新页面后交易记录将清空</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 交易记录 -->
+                <div class="simulator-history">
+                    <h2>📊 交易记录</h2>
+                    <div id="transaction-list">
+                        <div class="alert alert-info">
+                            暂无交易记录，请发起一笔支付
+                        </div>
+                    </div>
+
+                    <div id="transaction-stats" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <h3>交易统计</h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 15px;">
+                            <div style="text-align: center;">
+                                <div style="color: #666;">总交易数</div>
+                                <div style="font-size: 2rem; font-weight: 700;" id="total-count">0</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="color: #666;">成功交易</div>
+                                <div style="font-size: 2rem; font-weight: 700; color: #27ae60;" id="success-count">0</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="color: #666;">总金额</div>
+                                <div style="font-size: 2rem; font-weight: 700;" id="total-amount">¥0.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 支付学习网. 仅供学习使用.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/simulator.js"></script>
+</body>
+</html>

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>支付学习网 - 互联网支付知识学习平台</title>
-    <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,7 +15,6 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="active">首页</a></li>
-                <li><a href="pages/basics.html">支付基础</a></li>
                 <li><a href="pages/gateways.html">支付网关</a></li>
                 <li><a href="pages/simulator.html">支付模拟</a></li>
                 <li><a href="pages/security.html">安全机制</a></li>
@@ -31,87 +29,400 @@
 
     <!-- 主要内容 -->
     <main>
-        <!-- 英雄区域 -->
-        <section class="hero">
-            <div class="container">
-                <h1>欢迎来到支付学习网</h1>
-                <p class="hero-subtitle">全面了解互联网支付系统，掌握支付流程、网关技术和安全机制</p>
-                <div class="hero-buttons">
-                    <a href="pages/basics.html" class="btn btn-primary">开始学习</a>
-                    <a href="pages/simulator.html" class="btn btn-outline">体验模拟器</a>
-                </div>
+        <div class="container">
+            <div class="content">
+                <h2>📌 什么是互联网支付？</h2>
+                <p>互联网支付是指通过互联网进行资金转移和交易结算的一种支付方式。它连接了消费者、商家、银行和支付机构，实现了线上交易的便捷化和数字化。</p>
             </div>
-        </section>
 
-        <!-- 学习模块 -->
-        <section class="modules">
-            <div class="container">
-                <h2 class="section-title">学习模块</h2>
-                <div class="modules-grid">
-                    <div class="module-card">
-                        <div class="module-icon">📚</div>
-                        <h3>支付基础</h3>
-                        <p>了解支付系统基本概念、新兴支付方式（数字人民币、生物识别、Web3）和核心原理</p>
-                        <a href="pages/basics.html" class="btn-link">开始学习 →</a>
+            <div class="content">
+                <h2>🔄 支付流程总览</h2>
+                <p>标准的在线支付流程，包含4个核心角色：</p>
+                
+                <div class="swimlane-diagram">
+                    <div class="swimlane-header">
+                        <div class="swimlane-role">👤 用户</div>
+                        <div class="swimlane-role">🏪 商户</div>
+                        <div class="swimlane-role">🔗 支付网关</div>
+                        <div class="swimlane-role">🏦 银行</div>
                     </div>
-                    <div class="module-card">
-                        <div class="module-icon">🌐</div>
-                        <h3>支付网关</h3>
-                        <p>学习主流支付网关技术、BNPL先买后付、数字人民币集成和最佳实践</p>
-                        <a href="pages/gateways.html" class="btn-link">开始学习 →</a>
+                    <div class="swimlane-timeline">
+                        <div class="swimlane-step">
+                            <div class="swimlane-step-num">①</div>
+                            <div class="swimlane-step-content">
+                                <div class="swimlane-cell active">📱 <strong>①-a</strong> 选择商品<br/>提交订单</div>
+                                <div class="swimlane-cell active">📥 <strong>①-b</strong> 接收订单<br/>创建订单</div>
+                                <div class="swimlane-cell"></div>
+                                <div class="swimlane-cell"></div>
+                            </div>
+                        </div>
+                        <div class="swimlane-step">
+                            <div class="swimlane-step-num">②</div>
+                            <div class="swimlane-step-content">
+                                <div class="swimlane-cell"></div>
+                                <div class="swimlane-cell active">💳 <strong>②-b</strong> 发起支付<br/>跳转支付页</div>
+                                <div class="swimlane-cell active">🔐 <strong>②-c</strong> 验证商户<br/>展示支付方式</div>
+                                <div class="swimlane-cell"></div>
+                            </div>
+                        </div>
+                        <div class="swimlane-step">
+                            <div class="swimlane-step-num">③</div>
+                            <div class="swimlane-step-content">
+                                <div class="swimlane-cell active">✅ <strong>③-a</strong> 确认支付<br/>输入密码</div>
+                                <div class="swimlane-cell"></div>
+                                <div class="swimlane-cell active">📤 <strong>③-c</strong> 转发支付请求<br/>到银行系统</div>
+                                <div class="swimlane-cell active">🏦 <strong>③-d</strong> 接收请求<br/>验证账户</div>
+                            </div>
+                        </div>
+                        <div class="swimlane-step">
+                            <div class="swimlane-step-num">④</div>
+                            <div class="swimlane-step-content">
+                                <div class="swimlane-cell"></div>
+                                <div class="swimlane-cell"></div>
+                                <div class="swimlane-cell"></div>
+                                <div class="swimlane-cell success">💰 <strong>④-d</strong> 扣款成功<br/>返回结果</div>
+                            </div>
+                        </div>
+                        <div class="swimlane-step">
+                            <div class="swimlane-step-num">⑤</div>
+                            <div class="swimlane-step-content">
+                                <div class="swimlane-cell"></div>
+                                <div class="swimlane-cell active">📥 <strong>⑤-b</strong> 接收支付结果<br/>更新订单状态</div>
+                                <div class="swimlane-cell success">✅ <strong>⑤-c</strong> 通知商户<br/>返回结果</div>
+                                <div class="swimlane-cell"></div>
+                            </div>
+                        </div>
+                        <div class="swimlane-step">
+                            <div class="swimlane-step-num">⑥</div>
+                            <div class="swimlane-step-content">
+                                <div class="swimlane-cell success">🎉 <strong>⑥-a</strong> 支付完成<br/>显示成功</div>
+                                <div class="swimlane-cell success">📱 <strong>⑥-b</strong> 通知用户<br/>完成交易</div>
+                                <div class="swimlane-cell"></div>
+                                <div class="swimlane-cell"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="module-card">
-                        <div class="module-icon">🎮</div>
-                        <h3>支付模拟</h3>
-                        <p>通过交互式模拟器体验真实的支付流程，支持多种支付方式</p>
-                        <a href="pages/simulator.html" class="btn-link">开始体验 →</a>
-                    </div>
-                    <div class="module-card">
-                        <div class="module-icon">🔒</div>
-                        <h3>安全机制</h3>
-                        <p>掌握量子抗性加密、AI风控、零知识证明等2026年最新安全标准</p>
-                        <a href="pages/security.html" class="btn-link">开始学习 →</a>
+                </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- 学习要点 -->
-        <section class="features">
-            <div class="container">
-                <h2 class="section-title">学习要点</h2>
-                <div class="features-list">
-                    <div class="feature-item">
-                        <span class="feature-check">✓</span>
-                        <div>
-                            <h4>完整的支付流程</h4>
-                            <p>从下单到结算的全链路学习</p>
+            <div class="content">
+                <h2>🏗️ 支付系统架构</h2>
+                <p>一个完整的支付系统通常包含以下核心组件：</p>
+                <div class="architecture-diagram">
+                    <div class="component">👤 用户端<br/>(Client)<br/><small>网页 · App · 小程序 · 收银台</small></div>
+                    <div class="connector">→</div>
+                    <div class="component component-core">🏪 商户系统<br/>(Merchant)<br/><small>订单 · 商品 · 用户管理</small></div>
+                    <div class="connector">→</div>
+                    <div class="component component-core">🔗 支付网关<br/>(Payment Gateway)<br/><small>交易路由 · 协议转换</small></div>
+
+                    <div class="component component-bank">🏦 银行/金融机构<br/>(Bank)<br/><small>账户验证 · 资金划拨</small></div>
+                    <div class="connector">←</div>
+                    <div class="component component-clearing">⚡ 清算系统<br/>(Clearing)<br/><small>资金划拨 · 清算结算</small></div>
+                    <div class="connector">←</div>
+                    <div class="component"></div>
+
+                    <div class="component-flow">📍 支付流程: 用户 → 商户 → 支付平台 → 银行 → 清算系统</div>
+                </div>
+            </div>
+
+            <div class="content">
+                <h2>🏢 不同支付方式流程对比</h2>
+                <div class="comparison-diagram">
+                    <div class="payment-flow-section">
+                        <h3>💙 支付宝支付流程</h3>
+                        <div class="swimlane-diagram">
+                            <div class="swimlane-header">
+                                <div class="swimlane-role">👤 用户</div>
+                                <div class="swimlane-role">🏪 商户</div>
+                                <div class="swimlane-role">🔷 支付宝</div>
+                                <div class="swimlane-role">📱 支付宝APP</div>
+                            </div>
+                            <div class="swimlane-timeline">
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">①</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell active">🛒 <strong>①-a</strong> 选择商品<br/>提交订单</div>
+                                        <div class="swimlane-cell active">📥 <strong>①-b</strong> 创建订单</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">②</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">📱 <strong>②-b</strong> 跳转支付宝<br/>发起支付</div>
+                                        <div class="swimlane-cell active">🔐 <strong>②-c</strong> 验证商户<br/>返回支付信息</div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">③</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">📱 <strong>③-b</strong> 展示二维码<br/>或收银台</div>
+                                        <div class="swimlane-cell active">📄 <strong>③-c</strong> 生成支付订单</div>
+                                        <div class="swimlane-cell active">📱 <strong>③-d</strong> 扫码/跳转</div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">④</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell active">🔐 <strong>④-a</strong> 输入密码<br/>生物识别</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">🔐 <strong>④-c</strong> 验证身份</div>
+                                        <div class="swimlane-cell success">💰 <strong>④-d</strong> 扣款成功</div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">⑤</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">📥 <strong>⑤-b</strong> 异步通知<br/>更新订单</div>
+                                        <div class="swimlane-cell success">✅ <strong>⑤-c</strong> 通知商户<br/>返回结果</div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">⑥</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell success">🎉 <strong>⑥-a</strong> 支付完成<br/>显示结果</div>
+                                        <div class="swimlane-cell success">✅ <strong>⑥-b</strong> 订单更新<br/>通知用户</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✓</span>
-                        <div>
-                            <h4>实用的技术方案</h4>
-                            <p>真实场景下的网关集成指南</p>
+
+                    <div class="payment-flow-section">
+                        <h3>💚 微信支付流程</h3>
+                        <div class="swimlane-diagram">
+                            <div class="swimlane-header">
+                                <div class="swimlane-role">👤 用户</div>
+                                <div class="swimlane-role">🏪 商户</div>
+                                <div class="swimlane-role">💚 微信支付</div>
+                                <div class="swimlane-role">📱 微信APP</div>
+                            </div>
+                            <div class="swimlane-timeline">
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">①</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell active">🛒 <strong>①-a</strong> 选择商品<br/>提交订单</div>
+                                        <div class="swimlane-cell active">📥 <strong>①-b</strong> 创建订单</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">②</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">📤 <strong>②-b</strong> 统一下单请求<br/>到微信</div>
+                                        <div class="swimlane-cell active">📄 <strong>②-c</strong> 生成预付单<br/>返回prepay_id</div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">③</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">📱 <strong>③-b</strong> 获取支付参数<br/>调起支付</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">💳 <strong>③-d</strong> 弹出支付界面</div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">④</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell active">🔐 <strong>④-a</strong> 输入密码<br/>指纹/面容</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell success">💰 <strong>④-d</strong> 验证+扣款</div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">⑤</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">📥 <strong>⑤-b</strong> 异步通知<br/>验证签名</div>
+                                        <div class="swimlane-cell success">✅ <strong>⑤-c</strong> 通知商户<br/>返回结果</div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">⑥</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell success">🎉 <strong>⑥-a</strong> 支付完成<br/>显示结果</div>
+                                        <div class="swimlane-cell success">✅ <strong>⑥-b</strong> 更新订单<br/>展示结果</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✓</span>
-                        <div>
-                            <h4>互动式学习体验</h4>
-                            <p>通过模拟器加深理解</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <span class="feature-check">✓</span>
-                        <div>
-                            <h4>严格的安全标准</h4>
-                            <p>掌握行业安全最佳实践</p>
+
+                    <div class="payment-flow-section">
+                        <h3>❤️ 云闪付支付流程</h3>
+                        <div class="swimlane-diagram">
+                            <div class="swimlane-header">
+                                <div class="swimlane-role">👤 用户</div>
+                                <div class="swimlane-role">🏪 商户</div>
+                                <div class="swimlane-role">💳 云闪付APP</div>
+                                <div class="swimlane-role">🏦 银联系统</div>
+                            </div>
+                            <div class="swimlane-timeline">
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">①</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell active">🛒 <strong>①-a</strong> 选择商品<br/>提交订单</div>
+                                        <div class="swimlane-cell active">📥 <strong>①-b</strong> 创建订单</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">②</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell active">💳 <strong>②-a</strong> 选择云闪付</div>
+                                        <div class="swimlane-cell active">📱 <strong>②-b</strong> 发起支付<br/>跳转云闪付</div>
+                                        <div class="swimlane-cell active">🔐 <strong>②-c</strong> 验证请求<br/>返回支付方式</div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">③</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">📄 <strong>③-c</strong> 生成支付订单<br/>调起支付</div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">④</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell active">🔐 <strong>④-a</strong> 输入密码<br/>指纹/面容</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">🔐 <strong>④-c</strong> 验证身份</div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">⑤</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">🏦 <strong>⑤-c</strong> 调用银联系统</div>
+                                        <div class="swimlane-cell success">💰 <strong>⑤-d</strong> 验证卡号<br/>扣款成功</div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">⑥</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell active">📥 <strong>⑥-b</strong> 异步通知<br/>更新订单</div>
+                                        <div class="swimlane-cell success">✅ <strong>⑥-c</strong> 返回扣款结果<br/>通知商户</div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                                <div class="swimlane-step">
+                                    <div class="swimlane-step-num">⑦</div>
+                                    <div class="swimlane-step-content">
+                                        <div class="swimlane-cell success">🎉 <strong>⑦-a</strong> 支付完成<br/>显示结果</div>
+                                        <div class="swimlane-cell success">✅ <strong>⑦-b</strong> 订单更新<br/>展示结果</div>
+                                        <div class="swimlane-cell"></div>
+                                        <div class="swimlane-cell"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+
+            <div class="content">
+                <h2>📊 支付方式对比</h2>
+                <div class="comparison-chart">
+                    <div class="chart-row header">
+                        <div class="chart-cell">📌 对比维度</div>
+                        <div class="chart-cell">💙 支付宝</div>
+                        <div class="chart-cell">💚 微信支付</div>
+                        <div class="chart-cell">❤️ 云闪付</div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-cell"><strong>支付方式</strong></div>
+                        <div class="chart-cell">扫码、APP、网页、当面付</div>
+                        <div class="chart-cell">扫码、小程序、公众号、H5</div>
+                        <div class="chart-cell">扫码、APP、数字人民币、NFC</div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-cell"><strong>用户基础</strong></div>
+                        <div class="chart-cell">🚀 超10亿用户</div>
+                        <div class="chart-cell">🚀 超13亿用户</div>
+                        <div class="chart-cell">🚀 覆盖所有银联卡用户</div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-cell"><strong>手续费</strong></div>
+                        <div class="chart-cell">0.6%（一般商户）</div>
+                        <div class="chart-cell">0.6%（一般商户）</div>
+                        <div class="chart-cell">💰 0.5%-1%（根据银行）</div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-cell"><strong>到账时间</strong></div>
+                        <div class="chart-cell">T+1 或 实时</div>
+                        <div class="chart-cell">T+1 或 实时</div>
+                        <div class="chart-cell">T+1</div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-cell"><strong>主要优势</strong></div>
+                        <div class="chart-cell">⭐ 用户多、场景广、功能全</div>
+                        <div class="chart-cell">⭐ 社交化、小程序生态</div>
+                        <div class="chart-cell">⭐ 银联官方、跨银行、优惠多</div>
+                    </div>
+                    <div class="chart-row">
+                        <div class="chart-cell"><strong>适用场景</strong></div>
+                        <div class="chart-cell">电商、零售、线下支付</div>
+                        <div class="chart-cell">社交电商、小程序、线下</div>
+                        <div class="chart-cell">B2B、大额交易、企业支付</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <h2>🔑 支付关键概念</h2>
+                <div class="concept-map">
+                    <div class="concept-node">
+                        <h4>💰 交易 Transaction</h4>
+                        <p>一次完整的资金转移操作，包含金额、时间、交易双方等关键信息</p>
+                    </div>
+                    <div class="concept-connection">→</div>
+                    <div class="concept-node">
+                        <h4>🔒 授权 Authorization</h4>
+                        <p>银行确认账户有足够资金并冻结相应金额，但尚未实际扣款</p>
+                    </div>
+                    <div class="concept-connection">→</div>
+                    <div class="concept-node">
+                        <h4>⚡ 捕获 Capture</h4>
+                        <p>将授权金额实际扣除并转入商户账户的操作</p>
+                    </div>
+                    <div class="concept-connection">→</div>
+                    <div class="concept-node">
+                        <h4>🏦 清算 Settlement</h4>
+                        <p>将交易资金从用户账户转移到商户账户，并扣除手续费</p>
+                    </div>
+                    <div class="concept-connection">→</div>
+                    <div class="concept-node">
+                        <h4>↩️ 退款 Refund</h4>
+                        <p>将已支付的金额返还给用户，可以是全额或部分退款</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- 页脚 -->

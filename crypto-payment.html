@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>加密支付 - 支付学习网</title>
     <link rel="stylesheet" href="css/style.css?v=1.1">
+    <style>
+        pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      line-height: 1.5;
+    }
+    code {
+      font-family: inherit;
+    }
+    /* 简单颜色区分 */
+    .keyword { color: #569cd6; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; }
+    .function { color: #dcdcaa; }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -206,6 +225,7 @@
                     </div>
                     
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 私钥安全管理示例</span>
 <span class="comment"># 1. 分片存储</span>
 encrypted_key_part1 = <span class="function">encrypt</span>(private_key[:<span class="number">32</span>], master_password)
@@ -223,7 +243,7 @@ encrypted_key_part2 = <span class="function">encrypt</span>(private_key[<span cl
             valid_sigs += <span class="number">1</span>
     <span class="keyword">return</span> valid_sigs >= M_OF_N_THRESHOLD
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
                         ⚠️ 难点：私钥一旦泄露，无法撤销，必须采用最高安全级别防护
                     </div>
@@ -288,6 +308,7 @@ encrypted_key_part2 = <span class="function">encrypt</span>(private_key[<span cl
                     
                     <!-- 确认处理代码 -->
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 交易确认处理</span>
 <span class="keyword">def</span> <span class="function">wait_for_confirmation</span>(tx_hash, blockchain, min_confirmations):
     confirmations = <span class="number">0</span>
@@ -307,7 +328,7 @@ encrypted_key_part2 = <span class="function">encrypt</span>(private_key[<span cl
     <span class="keyword">else</span>:
         <span class="keyword">return</span> MIN_CONFIRMATIONS.get(blockchain, <span class="number">6</span>)
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
                         ⚠️ 难点：需平衡确认时间和用户体验，大额交易需更多确认
                     </div>
@@ -382,6 +403,7 @@ encrypted_key_part2 = <span class="function">encrypt</span>(private_key[<span cl
                     
                     <!-- 价格风险管理代码 -->
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 价格风险管理示例</span>
 <span class="keyword">class</span> PriceRiskManager:
     <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>, volatility_threshold=<span class="number">0.05</span>):  <span class="comment"># 5% 波动阈值</span>
@@ -405,7 +427,7 @@ encrypted_key_part2 = <span class="function">encrypt</span>(private_key[<span cl
         <span class="function">cache_set</span>(f<span class="string">"rate_lock:{order_id}"</span>, rate, duration_minutes * <span class="number">60</span>)
         <span class="keyword">return</span> rate
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
                         💡 核心：实施实时价格监控和汇率锁定机制
                     </div>

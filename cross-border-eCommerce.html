@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>跨境电商 - 支付学习网</title>
     <link rel="stylesheet" href="css/style.css?v=1.1">
+    <style>
+        pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      line-height: 1.5;
+    }
+    code {
+      font-family: inherit;
+    }
+    /* 简单颜色区分 */
+    .keyword { color: #569cd6; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; }
+    .function { color: #dcdcaa; }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -206,6 +225,7 @@
                     </div>
                     
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 多语言多货币支持示例</span>
 <span class="keyword">class</span> LocalizationManager:
     <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>):
@@ -243,7 +263,7 @@
         
         <span class="keyword">return</span> localized_product
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
                         ⚠️ 难点：需要维护大量本地化数据和实时汇率转换
                     </div>
@@ -318,6 +338,7 @@
                     
                     <!-- 物流管理代码 -->
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 物流跟踪管理</span>
 <span class="keyword">class</span> LogisticsTracker:
     <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>):
@@ -356,7 +377,7 @@
             <span class="string">"delivery_history"</span>: tracking_data.history
         }
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
                         ⚠️ 难点：需整合多家物流商API，处理复杂的清关流程
                     </div>
@@ -431,6 +452,7 @@
                     
                     <!-- 合规管理代码 -->
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 合规税务管理示例</span>
 <span class="keyword">class</span> ComplianceManager:
     <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>):
@@ -485,7 +507,7 @@
             <span class="string">"certificate_of_origin"</span>: certificate_of_origin
         }
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
                         💡 核心：建立完善的合规数据库和自动化申报系统
                     </div>

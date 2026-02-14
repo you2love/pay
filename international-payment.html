@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>跨境支付 - 支付学习网</title>
     <link rel="stylesheet" href="css/style.css?v=1.1">
+    <style>
+        pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      line-height: 1.5;
+    }
+    code {
+      font-family: inherit;
+    }
+    /* 简单颜色区分 */
+    .keyword { color: #569cd6; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; }
+    .function { color: #dcdcaa; }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -206,6 +225,7 @@
                     </div>
                     
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 汇率风险管理示例</span>
 <span class="comment"># 1. 实时汇率获取</span>
 exchange_rate = <span class="function">get_current_exchange_rate</span>(<span class="string">"USD"</span>, <span class="string">"EUR"</span>)
@@ -219,6 +239,7 @@ rate_threshold = <span class="number">0.02</span>  <span class="comment"># 2% �
     <span class="function">pause_transaction</span>()
     <span class="function">recalculate_price</span>()
                     </div>
+                </code></pre>
                     
                     <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
                         ⚠️ 难点：汇率在交易过程中可能发生变化，需及时锁定
@@ -284,6 +305,7 @@ rate_threshold = <span class="number">0.02</span>  <span class="comment"># 2% �
                     
                     <!-- 合规处理代码 -->
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 合规检查处理</span>
 <span class="keyword">def</span> <span class="function">compliance_check</span>(transaction):
     <span class="comment"># 1. KYC 验证</span>
@@ -301,7 +323,7 @@ rate_threshold = <span class="number">0.02</span>  <span class="comment"># 2% �
 
     <span class="keyword">return</span> <span class="function">approve_transaction</span>(transaction)
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
                         ⚠️ 难点：各国法规不同，需建立多国合规体系
                     </div>
@@ -376,6 +398,7 @@ rate_threshold = <span class="number">0.02</span>  <span class="comment"># 2% �
                     
                     <!-- 多币种代码 -->
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 多币种支持示例</span>
 <span class="keyword">class</span> CurrencyManager:
     <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>):
@@ -392,7 +415,7 @@ rate_threshold = <span class="number">0.02</span>  <span class="comment"># 2% �
     <span class="keyword">def</span> <span class="function">validate_currency</span>(<span class="keyword">self</span>, currency):
         <span class="keyword">return</span> currency <span class="keyword">in</span> <span class="keyword">self</span>.supported_currencies
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
                         💡 核心：建立实时汇率系统和多币种钱包管理
                     </div>

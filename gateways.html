@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>支付网关 - 支付学习网</title>
     <link rel="stylesheet" href="css/style.css?v=1.1">
+    <style>
+        pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      line-height: 1.5;
+    }
+    code {
+      font-family: inherit;
+    }
+    /* 简单颜色区分 */
+    .keyword { color: #569cd6; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; }
+    .function { color: #dcdcaa; }
+    </style>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -224,6 +243,7 @@
 
                     <!-- 签名生成步骤 -->
                     <div class="code-block" style="white-space: pre;">
+                        <pre><code>
 <span class="comment"># 签名算法实现详解</span>
 <span class="keyword">import</span> hmac
 <span class="keyword">import</span> hashlib
@@ -279,6 +299,7 @@ calculated_signature = <span class="function">generate_signature</span>(sample_p
 is_valid = <span class="function">verify_signature</span>(sample_params, calculated_signature, api_secret)
 <span class="function">print</span>(f<span class="string">"签名是否有效: {is_valid}"</span>)
                     </div>
+                </code></pre>
                         ⚠️ 难点：3秒内必须返回"success"，否则平台会重试
                     </div>
                 </div>
@@ -352,6 +373,7 @@ is_valid = <span class="function">verify_signature</span>(sample_params, calcula
                     
                     <!-- 幂等性代码 -->
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 使用唯一订单号作为幂等键</span>
 <span class="keyword">def</span> <span class="function">create_order</span>(out_trade_no, amount):
     <span class="comment"># 检查订单是否已存在</span>
@@ -363,6 +385,7 @@ is_valid = <span class="function">verify_signature</span>(sample_params, calcula
     order = <span class="function">db.create_order</span>(...)
     <span class="keyword">return</span> order
                     </div>
+                </code></pre>
                     
                     <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
                         💡 核心：用 out_trade_no（商户订单号）作为唯一约束
@@ -424,6 +447,7 @@ is_valid = <span class="function">verify_signature</span>(sample_params, calcula
                     
                     <!-- 超时处理代码 -->
                     <div class="code-block" style="margin: 20px 0;">
+                        <pre><code>
 <span class="comment"># 超时后的处理流程</span>
 <span class="keyword">def</span> <span class="function">pay_with_timeout</span>(order_id):
     <span class="keyword">try</span>:
@@ -436,7 +460,7 @@ is_valid = <span class="function">verify_signature</span>(sample_params, calcula
         <span class="keyword">else</span>:
             <span class="keyword">return</span> <span class="string">"支付中，请稍后查询"</span>
                     </div>
-                    
+                    </code></pre>
                     <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
                         ⚠️ 难点：订单状态以查询结果为准，别信前端
                     </div>

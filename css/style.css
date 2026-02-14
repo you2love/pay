@@ -1449,12 +1449,12 @@ table tr:hover {
         box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
     }
 
-    .code-block .comment { color: #6a9955 !important; font-style: italic !important; }
-    .code-block .keyword { color: #569cd6 !important; font-weight: 600 !important; }
-    .code-block .string { color: #ce9178 !important; }
-    .code-block .function { color: #dcdcaa !important; }
-    .code-block .number { color: #b5cea8 !important; }
-    .code-block .variable { color: #9cdcfe !important; }
+    div.code-block span.comment { color: #6a9955 !important; font-style: italic !important; }
+    div.code-block span.keyword { color: #569cd6 !important; font-weight: 600 !important; }
+    div.code-block span.string { color: #ce9178 !important; }
+    div.code-block span.function { color: #dcdcaa !important; }
+    div.code-block span.number { color: #b5cea8 !important; }
+    div.code-block span.variable { color: #9cdcfe !important; }
 
     /* 核心概念卡片 */
     .core-concept {

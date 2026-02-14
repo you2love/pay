@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语法高亮测试 - 支付学习网</title>
+    <link rel="stylesheet" href="css/style.css?v=1.1">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">💳 支付学习网</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="gateways.html">支付网关</a></li>
+                <li><a href="simulator.html">支付模拟</a></li>
+                <li><a href="security.html">安全机制</a></li>
+                <li><a href="international-payment.html">跨境支付</a></li>
+                <li><a href="crypto-payment.html">加密支付</a></li>
+                <li><a href="cross-border-eCommerce.html">跨境电商</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <div class="page-header">
+        <div class="container">
+            <h1>🔍 语法高亮测试</h1>
+            <p>测试代码块的语法高亮效果</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <!-- 代码块测试 -->
+            <div class="content">
+                <h2>💻 代码块语法高亮测试</h2>
+                
+                <div class="code-block">
+<span class="comment"># 签名算法实现详解</span>
+<span class="keyword">import</span> hmac
+<span class="keyword">import</span> hashlib
+
+<span class="comment"># 步骤1: 参数预处理</span>
+<span class="keyword">def</span> <span class="function">prepare_params</span>(raw_params):
+    <span class="comment"># 移除签名字段并按字典序排序</span>
+    clean_params = {k: v <span class="keyword">for</span> k, v <span class="keyword">in</span> raw_params.items() <span class="keyword">if</span> k != <span class="string">'sign'</span>}
+    <span class="keyword">return</span> <span class="function">sorted</span>(clean_params.items())
+
+<span class="comment"># 步骤2: 生成签名</span>
+<span class="keyword">def</span> <span class="function">generate_signature</span>(params, secret_key):
+    <span class="comment"># 按参数名排序</span>
+    sorted_params = <span class="function">prepare_params</span>(params)
+    
+    <span class="comment"># 拼接参数字符串</span>
+    param_str = <span class="string">"&"</span>.join([f<span class="string">"{k}={v}"</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> sorted_params])
+    
+    <span class="comment"># 添加密钥并生成签名</span>
+    sign_str = f<span class="string">"{param_str}&key={secret_key}"</span>
+    
+    <span class="comment"># 使用HMAC-SHA256生成签名</span>
+    sign = hmac.<span class="function">new</span>(
+        secret_key.encode(<span class="string">'utf-8'</span>),
+        sign_str.encode(<span class="string">'utf-8'</span>),
+        hashlib.sha256
+    ).hexdigest().lower()  <span class="comment"># 转换为小写</span>
+    
+    <span class="keyword">return</span> sign
+
+<span class="comment"># 步骤3: 验证签名</span>
+<span class="keyword">def</span> <span class="function">verify_signature</span>(received_params, received_sign, secret_key):
+    <span class="comment"># 重新计算签名</span>
+    expected_sign = <span class="function">generate_signature</span>(received_params, secret_key)
+    
+    <span class="comment"># 安全比较（防止时序攻击）</span>
+    <span class="keyword">return</span> hmac.compare_digest(expected_sign, received_sign.lower())
+
+<span class="comment"># 使用示例</span>
+sample_params = {
+    <span class="string">"amount"</span>: <span class="string">"100.00"</span>,
+    <span class="string">"currency"</span>: <span class="string">"CNY"</span>,
+    <span class="string">"merchant_id"</span>: <span class="string">"M123456"</span>,
+    <span class="string">"order_id"</span>: <span class="string">"ORD20230101001"</span>,
+    <span class="string">"timestamp"</span>: <span class="string">"1672531200"</span>
+}
+api_secret = <span class="string">"your_super_secret_api_key_here"</span>
+
+calculated_signature = <span class="function">generate_signature</span>(sample_params, api_secret)
+<span class="function">print</span>(f<span class="string">"计算得到的签名: {calculated_signature}"</span>)
+
+<span class="comment"># 验证签名</span>
+is_valid = <span class="function">verify_signature</span>(sample_params, calculated_signature, api_secret)
+<span class="function">print</span>(f<span class="string">"签名是否有效: {is_valid}"</span>)
+                </div>
+                
+                <h3>其他语法测试</h3>
+                
+                <div class="code-block">
+<span class="comment">// JavaScript 示例</span>
+<span class="keyword">const</span> payment = {
+    <span class="function">createOrder</span>: <span class="keyword">async</span> (params) => {
+        <span class="keyword">try</span> {
+            <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="function">fetch</span>(<span class="string">'/api/payment/create'</span>, {
+                <span class="function">method</span>: <span class="string">'POST'</span>,
+                <span class="function">headers</span>: {
+                    <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,
+                },
+                <span class="function">body</span>: <span class="function">JSON.stringify</span>(params)
+            });
+            
+            <span class="keyword">return</span> <span class="keyword">await</span> response.<span class="function">json</span>();
+        } <span class="keyword">catch</span> (error) {
+            <span class="function">console.error</span>(<span class="string">'Payment error:'</span>, error);
+            <span class="keyword">throw</span> error;
+        }
+    }
+};
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer><div class="container"></div></footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

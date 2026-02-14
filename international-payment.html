@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨境支付 - 支付学习网</title>
+    <link rel="stylesheet" href="css/style.css?v=1.1">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">💳 支付学习网</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="gateways.html">支付网关</a></li>
+                <li><a href="simulator.html">支付模拟</a></li>
+                <li><a href="security.html">安全机制</a></li>
+                <li><a href="international-payment.html" class="active">跨境支付</a></li>
+                <li><a href="crypto-payment.html">加密支付</a></li>
+                <li><a href="cross-border-eCommerce.html">跨境电商</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <div class="page-header">
+        <div class="container">
+            <h1>🌍 跨境支付</h1>
+            <p>连接全球市场的支付桥梁</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <!-- 什么是跨境支付 -->
+            <div class="content">
+                <h2>🌉 核心定位</h2>
+                <div class="highlight-box info">
+                    <div class="highlight-title info-title">🌐 跨境支付 = 不同国家/地区间的资金转移</div>
+                    <p>负责<strong>货币兑换、合规审查、汇率管理、国际清算</strong></p>
+                </div>
+            </div>
+
+            <!-- 跨境支付主流渠道对比 -->
+            <div class="content">
+                <h2>🏢 主流渠道对比</h2>
+                <table class="gateway-compare">
+                    <thead>
+                        <tr>
+                            <th>渠道</th>
+                            <th>覆盖</th>
+                            <th>时效</th>
+                            <th>特点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="gateway-name">💱 SWIFT</td>
+                            <td>全球200+国家</td>
+                            <td>1-4天</td>
+                            <td>银行间标准、安全性高、费用透明</td>
+                        </tr>
+                        <tr>
+                            <td class="gateway-name">💳 Visa/Mastercard</td>
+                            <td>全球190+国家</td>
+                            <td>实时-1天</td>
+                            <td>消费便捷、汇率优惠、广泛接受</td>
+                        </tr>
+                        <tr>
+                            <td class="gateway-name">📱 PayPal</td>
+                            <td>全球200+国家</td>
+                            <td>即时-1天</td>
+                            <td>用户友好、买家保护、多币种支持</td>
+                        </tr>
+                        <tr>
+                            <td class="gateway-name"> Alibaba Alipay+</td>
+                            <td>亚太15+国家</td>
+                            <td>即时</td>
+                            <td>本地化支付、低手续费、移动优先</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 跨境支付流程 -->
+            <div class="content">
+                <h2>🔧 跨境支付流程</h2>
+                <div class="flow-chart-horizontal" style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin: 30px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 220px; position: relative; margin: 10px; flex: 1; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            🌍
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px; text-align: center;">
+                            1. 发起支付
+                        </div>
+                        <div class="flow-node-content" style="background: #f8f9fa; border-radius: 12px; padding: 18px; text-align: center; width: 100%; border: 2px solid #e1e8ed; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666;">
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">选择目标国家</li>
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">输入收款信息</li>
+                                <li style="padding: 5px 0; border-bottom: none;">确认汇率</li>
+                            </ul>
+                        </div>
+                        <div style="content: ''; position: absolute; right: -30px; top: 30px; font-size: 2rem; color: #667eea; font-weight: bold; z-index: 10;">→</div>
+                    </div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 220px; position: relative; margin: 10px; flex: 1; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            💱
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px; text-align: center;">
+                            2. 货币兑换
+                        </div>
+                        <div class="flow-node-content" style="background: #f8f9fa; border-radius: 12px; padding: 18px; text-align: center; width: 100%; border: 2px solid #e1e8ed; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666;">
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">实时汇率计算</li>
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">汇率锁定</li>
+                                <li style="padding: 5px 0; border-bottom: none;">费用计算</li>
+                            </ul>
+                        </div>
+                        <div style="content: ''; position: absolute; right: -30px; top: 30px; font-size: 2rem; color: #667eea; font-weight: bold; z-index: 10;">→</div>
+                    </div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 220px; position: relative; margin: 10px; flex: 1; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                            🏦
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px; text-align: center;">
+                            3. 清算网络
+                        </div>
+                        <div class="flow-node-content" style="background: #f8f9fa; border-radius: 12px; padding: 18px; text-align: center; width: 100%; border: 2px solid #e1e8ed; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666;">
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">SWIFT/CHIPS</li>
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">本地清算系统</li>
+                                <li style="padding: 5px 0; border-bottom: none;">合规审查</li>
+                            </ul>
+                        </div>
+                        <div style="content: ''; position: absolute; right: -30px; top: 30px; font-size: 2rem; color: #667eea; font-weight: bold; z-index: 10;">→</div>
+                    </div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 220px; position: relative; margin: 10px; flex: 1; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);">
+                            ✅
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px; text-align: center;">
+                            4. 资金到账
+                        </div>
+                        <div class="flow-node-content" style="background: #f8f9fa; border-radius: 12px; padding: 18px; text-align: center; width: 100%; border: 2px solid #e1e8ed; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666;">
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">收款人确认</li>
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">汇率结算</li>
+                                <li style="padding: 5px 0; border-bottom: none;">交易完成</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ⭐⭐⭐ 核心难点 ⭐⭐⭐ -->
+            <div class="content" style="border: 3px solid #ff6b00; border-radius: 16px; margin: 30px 0;">
+                <h2 style="color: #ff6b00;">🔥🔥🔥 核心难点（必看）</h2>
+
+                <!-- 难点1: 汇率波动 -->
+                <div class="content-section">
+                    <h3 style="color: #667eea; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">💱</span> 1. 汇率波动风险
+                    </h3>
+                    
+                    <div class="highlight-box info" style="margin: 15px 0; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>📊 汇率风险管理</span>
+                        </div>
+                        <p>汇率波动直接影响交易成本和利润</p>
+                    </div>
+                    
+                    <!-- 汇率管理流程图 -->
+                    <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                📈
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                实时监控
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                🛡️
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                对冲策略
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                💰
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                成本控制
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block" style="margin: 20px 0;">
+<span class="comment"># 汇率风险管理示例</span>
+<span class="comment"># 1. 实时汇率获取</span>
+exchange_rate = <span class="function">get_current_exchange_rate</span>(<span class="string">"USD"</span>, <span class="string">"EUR"</span>)
+
+<span class="comment"># 2. 汇率波动阈值设定</span>
+rate_threshold = <span class="number">0.02</span>  <span class="comment"># 2% 波动阈值</span>
+
+<span class="comment"># 3. 动态定价策略</span>
+<span class="keyword">if</span> abs(exchange_rate - locked_rate) > rate_threshold:
+    <span class="comment"># 重新计算价格或暂停交易</span>
+    <span class="function">pause_transaction</span>()
+    <span class="function">recalculate_price</span>()
+                    </div>
+                    
+                    <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
+                        ⚠️ 难点：汇率在交易过程中可能发生变化，需及时锁定
+                    </div>
+                </div>
+
+                <!-- 难点2: 合规监管 -->
+                <div class="content-section">
+                    <h3 style="color: #f093fb; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">⚖️</span> 2. 合规监管要求
+                    </h3>
+                    
+                    <div class="highlight-box info" style="margin: 15px 0; background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>📋 合规要求</span>
+                        </div>
+                        <p>各国反洗钱(AML)和了解客户(KYC)规定</p>
+                    </div>
+                    
+                    <!-- 合规流程图 -->
+                    <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 140px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                🆔
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                身份验证
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 140px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                📋
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                资金来源
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 140px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                🏛️
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                监管报告
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 合规要求警示框 -->
+                    <div class="highlight-box danger" style="margin: 20px 0; background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);">
+                        <div class="highlight-title danger-title" style="display: flex; align-items: center; gap: 8px;">
+                            ⚠️ 三大合规要求
+                        </div>
+                        <ol style="margin: 10px 0 0 20px; padding: 0;">
+                            <li style="margin-bottom: 8px;"><strong>KYC (了解客户)</strong> - 验证客户身份和背景</li>
+                            <li style="margin-bottom: 8px;"><strong>AML (反洗钱)</strong> - 监控可疑交易活动</li>
+                            <li><strong>CFT (反恐融资)</strong> - 防止资金流向恐怖组织</li>
+                        </ol>
+                    </div>
+                    
+                    <!-- 合规处理代码 -->
+                    <div class="code-block" style="margin: 20px 0;">
+<span class="comment"># 合规检查处理</span>
+<span class="keyword">def</span> <span class="function">compliance_check</span>(transaction):
+    <span class="comment"># 1. KYC 验证</span>
+    <span class="keyword">if not</span> <span class="function">validate_kyc</span>(transaction.sender):
+        <span class="keyword">raise</span> ComplianceError(<span class="string">"KYC validation failed"</span>)
+
+    <span class="comment"># 2. AML 检查</span>
+    risk_score = <span class="function">calculate_risk_score</span>(transaction)
+    <span class="keyword">if</span> risk_score > HIGH_RISK_THRESHOLD:
+        <span class="keyword">return</span> <span class="function">flag_for_review</span>(transaction)
+
+    <span class="comment"># 3. 地理限制检查</span>
+    <span class="keyword">if</span> <span class="function">is_restricted_country</span>(transaction.destination):
+        <span class="keyword">raise</span> ComplianceError(<span class="string">"Transaction to restricted country"</span>)
+
+    <span class="keyword">return</span> <span class="function">approve_transaction</span>(transaction)
+                    </div>
+                    
+                    <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
+                        ⚠️ 难点：各国法规不同，需建立多国合规体系
+                    </div>
+                </div>
+
+                <!-- 难点3: 多币种支持 -->
+                <div class="content-section">
+                    <h3 style="color: #11998e; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">💳</span> 3. 多币种支持
+                    </h3>
+                    
+                    <div class="highlight-box info" style="margin: 15px 0; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>💱 多币种管理</span>
+                        </div>
+                        <p>支持多种货币的接收、存储和转换</p>
+                    </div>
+                    
+                    <!-- 多币种管理流程图 -->
+                    <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                USD
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                美元
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">⇄</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                EUR
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                欧元
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">⇄</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                CNY
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                人民币
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">⇄</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);">
+                                JPY
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                日元
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 为什么需要多币种 -->
+                    <div class="highlight-box warning" style="margin: 20px 0; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                        <div class="highlight-title warning-title" style="display: flex; align-items: center; gap: 8px;">
+                            💡 为什么需要多币种？
+                        </div>
+                        <ul style="margin: 10px 0 0 20px; padding: 0;">
+                            <li style="margin-bottom: 5px;">• 满足不同地区用户的支付习惯</li>
+                            <li style="margin-bottom: 5px;">• 降低汇率转换成本</li>
+                            <li>• 提升用户体验和转化率</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 多币种代码 -->
+                    <div class="code-block" style="margin: 20px 0;">
+<span class="comment"># 多币种支持示例</span>
+<span class="keyword">class</span> CurrencyManager:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="keyword">self</span>):
+        <span class="keyword">self</span>.supported_currencies = [<span class="string">"USD"</span>, <span class="string">"EUR"</span>, <span class="string">"GBP"</span>, <span class="string">"JPY"</span>, <span class="string">"CNY"</span>]
+        <span class="keyword">self</span>.exchange_rates = <span class="function">fetch_exchange_rates</span>()
+
+    <span class="keyword">def</span> <span class="function">convert_currency</span>(<span class="keyword">self</span>, amount, from_currency, to_currency):
+        <span class="keyword">if</span> from_currency == to_currency:
+            <span class="keyword">return</span> amount
+        
+        rate = <span class="keyword">self</span>.exchange_rates.get(f<span class="string">"{from_currency}_{to_currency}"</span>)
+        <span class="keyword">return</span> amount * rate
+
+    <span class="keyword">def</span> <span class="function">validate_currency</span>(<span class="keyword">self</span>, currency):
+        <span class="keyword">return</span> currency <span class="keyword">in</span> <span class="keyword">self</span>.supported_currencies
+                    </div>
+                    
+                    <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
+                        💡 核心：建立实时汇率系统和多币种钱包管理
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常见错误 -->
+            <div class="content">
+                <h2>⚠️ 跨境支付常见问题</h2>
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>问题</th>
+                            <th>原因</th>
+                            <th>解决方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>汇率损失</strong></td><td>中间银行多次转换</td><td>选择直连银行通道</td></tr>
+                        <tr><td><strong>到账延迟</td><td>合规审查耗时</td><td>提前完成KYC认证</td></tr>
+                        <tr><td><strong>费用不透明</td><td>隐藏中间费用</td><td>使用透明计费系统</td></tr>
+                        <tr><td><strong>交易被拒</td><td>触发风控规则</td><td>完善商户资料</td></tr>
+                        <tr><td><strong>信息缺失</td><td>缺少必要字段</td><td>使用标准化报文格式</td></tr>
+                        <tr><td><strong>监管限制</td><td>违反当地法规</td><td>了解目标国政策</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 核心API -->
+            <div class="content">
+                <h2>📡 跨境支付核心功能</h2>
+                <div class="highlight-box success">
+                    <div class="highlight-title success-title">📋 功能清单</div>
+                    <p>
+                        <strong>1. 汇率管理</strong> - 实时汇率获取与锁定<br>
+                        <strong>2. 多币种钱包</strong> - 支持多种货币存储<br>
+                        <strong>3. 合规检查</strong> - KYC/AML自动化审查<br>
+                        <strong>4. 清算对接</strong> - 连接国际清算网络
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer><div class="container"></div></footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

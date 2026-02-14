@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付网关 - 支付学习网</title>
+    <link rel="stylesheet" href="css/style.css?v=1.1">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">💳 支付学习网</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="gateways.html" class="active">支付网关</a></li>
+                <li><a href="simulator.html">支付模拟</a></li>
+                <li><a href="security.html">安全机制</a></li>
+                <li><a href="international-payment.html">跨境支付</a></li>
+                <li><a href="crypto-payment.html">加密支付</a></li>
+                <li><a href="cross-border-eCommerce.html">跨境电商</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <div class="page-header">
+        <div class="container">
+            <h1>💰 支付网关</h1>
+            <p>商户与银行之间的桥梁</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <!-- 什么是支付网关 -->
+            <div class="content">
+                <h2>🌉 核心定位</h2>
+                <div class="highlight-box info">
+                    <div class="highlight-title info-title">🔗 支付网关 = 商户系统 ↔ 银行系统 的翻译官</div>
+                    <p>负责<strong>交易路由、协议转换、数据加密、结果通知</strong></p>
+                </div>
+            </div>
+
+            <!-- 主流支付网关对比 -->
+            <div class="content">
+                <h2>🏢 主流网关对比</h2>
+                <table class="gateway-compare">
+                    <thead>
+                        <tr>
+                            <th>网关</th>
+                            <th>用户量</th>
+                            <th>覆盖</th>
+                            <th>特点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="gateway-name">💙 支付宝</td>
+                            <td>10亿+</td>
+                            <td>中国</td>
+                            <td>功能最全、AI风控、刷脸支付</td>
+                        </tr>
+                        <tr>
+                            <td class="gateway-name">💚 微信支付</td>
+                            <td>13亿+</td>
+                            <td>中国</td>
+                            <td>小程序生态、私域流量</td>
+                        </tr>
+                        <tr>
+                            <td class="gateway-name">💜 Stripe</td>
+                            <td>全球</td>
+                            <td>135+国家</td>
+                            <td>开发者友好、多币种</td>
+                        </tr>
+                        <tr>
+                            <td class="gateway-name">💙 PayPal</td>
+                            <td>4亿+</td>
+                            <td>190+国家</td>
+                            <td>跨境支付、买家保护</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 集成步骤 -->
+            <div class="content">
+                <h2>🔧 集成四步走</h2>
+                <div class="flow-chart-horizontal" style="display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; margin: 30px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 220px; position: relative; margin: 10px; flex: 1; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            📝
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px; text-align: center;">
+                            1. 注册商户
+                        </div>
+                        <div class="flow-node-content" style="background: #f8f9fa; border-radius: 12px; padding: 18px; text-align: center; width: 100%; border: 2px solid #e1e8ed; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666;">
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">营业执照</li>
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">法人身份证</li>
+                                <li style="padding: 5px 0; border-bottom: none;">银行账户</li>
+                            </ul>
+                        </div>
+                        <div style="content: ''; position: absolute; right: -30px; top: 30px; font-size: 2rem; color: #667eea; font-weight: bold; z-index: 10;">→</div>
+                    </div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 220px; position: relative; margin: 10px; flex: 1; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            🔑
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px; text-align: center;">
+                            2. 获取密钥
+                        </div>
+                        <div class="flow-node-content" style="background: #f8f9fa; border-radius: 12px; padding: 18px; text-align: center; width: 100%; border: 2px solid #e1e8ed; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666;">
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">merchant_id</li>
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">API Key</li>
+                                <li style="padding: 5px 0; border-bottom: none;">应用AppID</li>
+                            </ul>
+                        </div>
+                        <div style="content: ''; position: absolute; right: -30px; top: 30px; font-size: 2rem; color: #667eea; font-weight: bold; z-index: 10;">→</div>
+                    </div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 220px; position: relative; margin: 10px; flex: 1; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                            📦
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px; text-align: center;">
+                            3. 接入SDK
+                        </div>
+                        <div class="flow-node-content" style="background: #f8f9fa; border-radius: 12px; padding: 18px; text-align: center; width: 100%; border: 2px solid #e1e8ed; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666;">
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">服务端SDK</li>
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">客户端SDK</li>
+                                <li style="padding: 5px 0; border-bottom: none;">配置密钥</li>
+                            </ul>
+                        </div>
+                        <div style="content: ''; position: absolute; right: -30px; top: 30px; font-size: 2rem; color: #667eea; font-weight: bold; z-index: 10;">→</div>
+                    </div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 220px; position: relative; margin: 10px; flex: 1; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);">
+                            🧪
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 12px; text-align: center;">
+                            4. 沙箱测试
+                        </div>
+                        <div class="flow-node-content" style="background: #f8f9fa; border-radius: 12px; padding: 18px; text-align: center; width: 100%; border: 2px solid #e1e8ed; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.9rem; color: #666;">
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">下单接口</li>
+                                <li style="padding: 5px 0; border-bottom: 1px dashed #e1e8ed;">回调通知</li>
+                                <li style="padding: 5px 0; border-bottom: none;">退款流程</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ⭐⭐⭐ 核心难点 ⭐⭐⭐ -->
+            <div class="content" style="border: 3px solid #ff6b00; border-radius: 16px; margin: 30px 0;">
+                <h2 style="color: #ff6b00;">🔥🔥🔥 核心难点（必看）</h2>
+
+                <!-- 难点1: 签名机制 -->
+                <div class="content-section">
+                    <h3 style="color: #667eea; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">🔐</span> 1. 签名机制
+                    </h3>
+                    
+                    <div class="highlight-box info" style="margin: 15px 0; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>🔍 签名机制原理</span>
+                        </div>
+                        <p>所有请求必须带签名，防止数据被篡改</p>
+                    </div>
+                    
+                    <!-- 签名流程图 -->
+                    <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                1
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                参数排序
+                            </div>
+                            <div class="flow-node-content" style="background: #f8f9fa; border-radius: 8px; padding: 12px; text-align: center; width: 100%; border: 1px solid #e1e8ed; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                <div style="font-size: 0.8rem; color: #666;">按字典序排列参数</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                2
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                字符串拼接
+                            </div>
+                            <div class="flow-node-content" style="background: #f8f9fa; border-radius: 8px; padding: 12px; text-align: center; width: 100%; border: 1px solid #e1e8ed; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                <div style="font-size: 0.8rem; color: #666;">添加密钥拼接</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                3
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                加密生成
+                            </div>
+                            <div class="flow-node-content" style="background: #f8f9fa; border-radius: 8px; padding: 12px; text-align: center; width: 100%; border: 1px solid #e1e8ed; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                <div style="font-size: 0.8rem; color: #666;">HMAC-SHA256</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 签名算法实现 -->
+                    <div class="highlight-box info" style="margin: 20px 0; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>🔐 签名算法实现</span>
+                        </div>
+                        <p>下面是完整的签名生成和验证过程：</p>
+                    </div>
+
+                    <!-- 签名生成步骤 -->
+                    <div class="code-block" style="white-space: pre;">
+<span class="comment"># 签名算法实现详解</span>
+<span class="keyword">import</span> hmac
+<span class="keyword">import</span> hashlib
+
+<span class="comment"># 步骤1: 参数预处理</span>
+<span class="keyword">def</span> <span class="function">prepare_params</span>(raw_params):
+    <span class="comment"># 移除签名字段并按字典序排序</span>
+    clean_params = {k: v <span class="keyword">for</span> k, v <span class="keyword">in</span> raw_params.items() <span class="keyword">if</span> k != <span class="string">'sign'</span>}
+    <span class="keyword">return</span> <span class="function">sorted</span>(clean_params.items())
+
+<span class="comment"># 步骤2: 生成签名</span>
+<span class="keyword">def</span> <span class="function">generate_signature</span>(params, secret_key):
+    <span class="comment"># 按参数名排序</span>
+    sorted_params = <span class="function">prepare_params</span>(params)
+    
+    <span class="comment"># 拼接参数字符串</span>
+    param_str = <span class="string">"&"</span>.join([f<span class="string">"{k}={v}"</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> sorted_params])
+    
+    <span class="comment"># 添加密钥并生成签名</span>
+    sign_str = f<span class="string">"{param_str}&key={secret_key}"</span>
+    
+    <span class="comment"># 使用HMAC-SHA256生成签名</span>
+    sign = hmac.<span class="function">new</span>(
+        secret_key.encode(<span class="string">'utf-8'</span>),
+        sign_str.encode(<span class="string">'utf-8'</span>),
+        hashlib.sha256
+    ).hexdigest().lower()  <span class="comment"># 转换为小写</span>
+    
+    <span class="keyword">return</span> sign
+
+<span class="comment"># 步骤3: 验证签名</span>
+<span class="keyword">def</span> <span class="function">verify_signature</span>(received_params, received_sign, secret_key):
+    <span class="comment"># 重新计算签名</span>
+    expected_sign = <span class="function">generate_signature</span>(received_params, secret_key)
+    
+    <span class="comment"># 安全比较（防止时序攻击）</span>
+    <span class="keyword">return</span> hmac.compare_digest(expected_sign, received_sign.lower())
+
+<span class="comment"># 使用示例</span>
+sample_params = {
+    <span class="string">"amount"</span>: <span class="string">"100.00"</span>,
+    <span class="string">"currency"</span>: <span class="string">"CNY"</span>,
+    <span class="string">"merchant_id"</span>: <span class="string">"M123456"</span>,
+    <span class="string">"order_id"</span>: <span class="string">"ORD20230101001"</span>,
+    <span class="string">"timestamp"</span>: <span class="string">"1672531200"</span>
+}
+api_secret = <span class="string">"your_super_secret_api_key_here"</span>
+
+calculated_signature = <span class="function">generate_signature</span>(sample_params, api_secret)
+<span class="function">print</span>(f<span class="string">"计算得到的签名: {calculated_signature}"</span>)
+
+<span class="comment"># 验证签名</span>
+is_valid = <span class="function">verify_signature</span>(sample_params, calculated_signature, api_secret)
+<span class="function">print</span>(f<span class="string">"签名是否有效: {is_valid}"</span>)
+                    </div>
+                        ⚠️ 难点：3秒内必须返回"success"，否则平台会重试
+                    </div>
+                </div>
+
+                <!-- 难点3: 幂等性 -->
+                <div class="content-section">
+                    <h3 style="color: #11998e; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">🔄</span> 3. 幂等性设计
+                    </h3>
+                    
+                    <div class="highlight-box info" style="margin: 15px 0; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>✅ 幂等性</span>
+                        </div>
+                        <p>同一个请求重复执行，结果一致</p>
+                    </div>
+                    
+                    <!-- 幂等性场景图 -->
+                    <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                👤
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                用户
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                🖱️
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                重复点击
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                📦
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                幂等处理
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);">
+                                ✅
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                结果一致
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 为什么需要幂等性 -->
+                    <div class="highlight-box warning" style="margin: 20px 0; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                        <div class="highlight-title warning-title" style="display: flex; align-items: center; gap: 8px;">
+                            💡 为什么要幂等？
+                        </div>
+                        <ul style="margin: 10px 0 0 20px; padding: 0;">
+                            <li style="margin-bottom: 5px;">• 用户重复点击支付按钮</li>
+                            <li style="margin-bottom: 5px;">• 网络超时导致重试</li>
+                            <li>• 回调重复通知</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 幂等性代码 -->
+                    <div class="code-block" style="margin: 20px 0;">
+<span class="comment"># 使用唯一订单号作为幂等键</span>
+<span class="keyword">def</span> <span class="function">create_order</span>(out_trade_no, amount):
+    <span class="comment"># 检查订单是否已存在</span>
+    order = <span class="function">db.get_order</span>(out_trade_no)
+    <span class="keyword">if</span> order:
+        <span class="keyword">return</span> order  <span class="comment"># 已存在，直接返回</span>
+
+    <span class="comment"># 不存在，创建新订单</span>
+    order = <span class="function">db.create_order</span>(...)
+    <span class="keyword">return</span> order
+                    </div>
+                    
+                    <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
+                        💡 核心：用 out_trade_no（商户订单号）作为唯一约束
+                    </div>
+                </div>
+
+                <!-- 难点4: 超时处理 -->
+                <div class="content-section">
+                    <h3 style="color: #ff6b6b; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">⏰</span> 4. 超时与状态查询
+                    </h3>
+                    
+                    <div class="highlight-box info" style="margin: 15px 0; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>⏱️ 超时处理</span>
+                        </div>
+                        <p>支付超时了怎么办？</p>
+                    </div>
+                    
+                    <!-- 超时处理流程图 -->
+                    <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                🕐
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                超时发生
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                🔍
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                主动查询
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                📊
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                确认状态
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 解决方案 -->
+                    <div class="highlight-box info" style="margin: 20px 0; background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            🔄 解决方案：主动查询
+                        </div>
+                        <p>支付成功后，页面卡住了 → 调用查询接口确认状态</p>
+                    </div>
+                    
+                    <!-- 超时处理代码 -->
+                    <div class="code-block" style="margin: 20px 0;">
+<span class="comment"># 超时后的处理流程</span>
+<span class="keyword">def</span> <span class="function">pay_with_timeout</span>(order_id):
+    <span class="keyword">try</span>:
+        result = <span class="function">request_payment</span>(order_id, timeout=<span class="string">"30s"</span>)
+    <span class="keyword">except</span> Timeout:
+        <span class="comment"># 超时了？立即查询状态</span>
+        status = <span class="function">query_order_status</span>(order_id)
+        <span class="keyword">if</span> status == <span class="string">"SUCCESS"</span>:
+            <span class="keyword">return</span> <span class="string">"已支付"</span>
+        <span class="keyword">else</span>:
+            <span class="keyword">return</span> <span class="string">"支付中，请稍后查询"</span>
+                    </div>
+                    
+                    <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
+                        ⚠️ 难点：订单状态以查询结果为准，别信前端
+                    </div>
+                </div>
+            </div>
+
+            <!-- 订单状态流转 -->
+            <div class="content">
+                <h2>📋 订单状态流转</h2>
+                <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 30px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-status created" style="min-width: 100px; padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; background: #e3f2fd; color: #1565c0; border: 2px solid #1565c0;">
+                            CREATED
+                        </div>
+                        <div class="flow-node-label" style="margin-top: 8px; font-size: 0.9rem; color: #666;">订单创建</div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-status wait" style="min-width: 100px; padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; background: #fff3e0; color: #e65100; border: 2px solid #e65100;">
+                            WAIT_PAY
+                        </div>
+                        <div class="flow-node-label" style="margin-top: 8px; font-size: 0.9rem; color: #666;">等待支付</div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-status success" style="min-width: 100px; padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; background: #e8f5e9; color: #2e7d32; border: 2px solid #2e7d32;">
+                            SUCCESS
+                        </div>
+                        <div class="flow-node-label" style="margin-top: 8px; font-size: 0.9rem; color: #666;">支付成功</div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-status refund" style="min-width: 100px; padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; background: #fce4ec; color: #c2185b; border: 2px solid #c2185b;">
+                            REFUND
+                        </div>
+                        <div class="flow-node-label" style="margin-top: 8px; font-size: 0.9rem; color: #666;">已退款</div>
+                    </div>
+                </div>
+                
+                <!-- 第二条状态流转路径 -->
+                <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 20px 0; flex-wrap: nowrap; padding: 10px 0; width: 100%;">
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-status wait" style="min-width: 100px; padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; background: #fff3e0; color: #e65100; border: 2px solid #e65100;">
+                            WAIT_PAY
+                        </div>
+                        <div class="flow-node-label" style="margin-top: 8px; font-size: 0.9rem; color: #666;">等待支付</div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-status closed" style="min-width: 100px; padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; background: #f5f5f5; color: #666; border: 2px solid #999;">
+                            CLOSED
+                        </div>
+                        <div class="flow-node-label" style="margin-top: 8px; font-size: 0.9rem; color: #666;">超时关闭</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 常见错误 -->
+            <div class="content">
+                <h2>⚠️ 常见错误码</h2>
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>错误码</th>
+                            <th>含义</th>
+                            <th>解决方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>1001</strong></td><td>参数错误</td><td>检查必填参数是否完整</td></tr>
+                        <tr><td><strong>1002</strong></td><td>签名失败</td><td>检查签名算法和密钥</td></tr>
+                        <tr><td><strong>1003</strong></td><td>订单不存在</td><td>检查订单号是否正确</td></tr>
+                        <tr><td><strong>1004</strong></td><td>订单状态异常</td><td>别重复操作，换查询接口</td></tr>
+                        <tr><td><strong>1005</strong></td><td>余额不足</td><td>提示用户充值</td></tr>
+                        <tr><td><strong>1006</strong></td><td>系统繁忙</td><td>稍后重试</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 核心API -->
+            <div class="content">
+                <h2>📡 四个核心接口</h2>
+                <div class="highlight-box success">
+                    <div class="highlight-title success-title">📝 接口清单</div>
+                    <p>
+                        <strong>1. 统一下单</strong> /api/payment/create - 创建支付订单<br>
+                        <strong>2. 支付查询</strong> /api/payment/query - 查询订单状态<br>
+                        <strong>3. 申请退款</strong> /api/payment/refund - 退款操作<br>
+                        <strong>4. 异步回调</strong> 商户提供notify_url - 接收支付结果
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer><div class="container"></div></footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

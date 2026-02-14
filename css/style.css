@@ -1418,19 +1418,20 @@ table tr:hover {
     .info-title { color: #1565c0; }
 
     /* 代码块样式 */
-    .code-block {
-        background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-        color: #d4d4d4;
-        padding: 25px 20px;
-        border-radius: 12px;
-        font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
-        font-size: 0.9rem;
-        overflow-x: auto;
-        margin: 20px 0;
-        line-height: 1.8;
-        border: 2px solid #667eea;
-        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-        position: relative;
+    div.code-block {
+        background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%) !important;
+        color: #d4d4d4 !important;
+        padding: 25px 20px !important;
+        border-radius: 12px !important;
+        font-family: 'Monaco', 'Menlo', 'Consolas', monospace !important;
+        font-size: 0.9rem !important;
+        overflow-x: auto !important;
+        margin: 20px 0 !important;
+        line-height: 1.8 !important;
+        border: 2px solid #667eea !important;
+        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+        position: relative !important;
+        white-space: pre !important; /* 保留空白符和换行 */
     }
 
     .code-block::before {
@@ -1448,12 +1449,12 @@ table tr:hover {
         box-shadow: 0 2px 10px rgba(102, 126, 234, 0.4);
     }
 
-    .code-block .comment { color: #6a9955; font-style: italic; }
-    .code-block .keyword { color: #569cd6; font-weight: 600; }
-    .code-block .string { color: #ce9178; }
-    .code-block .function { color: #dcdcaa; }
-    .code-block .number { color: #b5cea8; }
-    .code-block .variable { color: #9cdcfe; }
+    .code-block .comment { color: #6a9955 !important; font-style: italic !important; }
+    .code-block .keyword { color: #569cd6 !important; font-weight: 600 !important; }
+    .code-block .string { color: #ce9178 !important; }
+    .code-block .function { color: #dcdcaa !important; }
+    .code-block .number { color: #b5cea8 !important; }
+    .code-block .variable { color: #9cdcfe !important; }
 
     /* 核心概念卡片 */
     .core-concept {
@@ -1543,86 +1544,160 @@ table tr:hover {
     }
 
     /* 横向流程图 */
-    .flow-chart-horizontal {
+    .content .flow-chart-horizontal {
         display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 0 !important;
+        align-items: flex-start !important;
+        justify-content: space-between !important;
+        gap: 20px !important;
         margin: 30px 0 !important;
-        flex-wrap: wrap !important;
+        flex-wrap: nowrap !important;
+        padding: 20px 0 !important;
+        width: 100% !important;
     }
 
-    .flow-node {
+    .content .flow-chart-horizontal .flow-node {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        min-width: 180px !important;
+        min-width: 220px !important;
         position: relative !important;
         margin: 10px !important;
+        flex: 1 !important;
+        text-align: center !important;
+        background: transparent !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
     }
 
-    .flow-node::after {
-        content: "→";
-        position: absolute;
-        right: -15px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 2rem;
-        color: #667eea;
-        font-weight: bold;
+    .content .flow-chart-horizontal .flow-node:not(:last-child)::after {
+        content: "→" !important;
+        position: absolute !important;
+        right: -30px !important;
+        top: 30px !important;
+        font-size: 2rem !important;
+        color: #667eea !important;
+        font-weight: bold !important;
+        z-index: 10 !important;
     }
 
-    .flow-node:last-child::after {
-        display: none;
+    .content .flow-chart-horizontal .flow-node:last-child::after {
+        display: none !important;
     }
 
-    .flow-node-circle {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    .content .flow-chart-horizontal .flow-node-circle {
+        width: 70px !important;
+        height: 70px !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.8rem !important;
+        margin-bottom: 15px !important;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2) !important;
+        z-index: 2 !important;
+        position: relative !important;
     }
 
-    .flow-node:nth-child(1) .flow-node-circle { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-    .flow-node:nth-child(2) .flow-node-circle { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-    .flow-node:nth-child(3) .flow-node-circle { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
-    .flow-node:nth-child(4) .flow-node-circle { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%); }
-
-    .flow-node-title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 8px;
+    .content .flow-chart-horizontal .flow-node:nth-child(1) .flow-node-circle { 
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; 
+    }
+    .content .flow-chart-horizontal .flow-node:nth-child(2) .flow-node-circle { 
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; 
+    }
+    .content .flow-chart-horizontal .flow-node:nth-child(3) .flow-node-circle { 
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important; 
+    }
+    .content .flow-chart-horizontal .flow-node:nth-child(4) .flow-node-circle { 
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%) !important; 
     }
 
-    .flow-node-content {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 15px;
-        text-align: center;
-        width: 100%;
-        border: 1px solid #e1e8ed;
+    .content .flow-chart-horizontal .flow-node-title {
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        color: #2c3e50 !important;
+        margin-bottom: 12px !important;
+        text-align: center !important;
     }
 
-    .flow-node-content ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        font-size: 0.85rem;
-        color: #666;
+    .content .flow-chart-horizontal .flow-node-content {
+        background: #f8f9fa !important;
+        border-radius: 12px !important;
+        padding: 18px !important;
+        text-align: center !important;
+        width: 100% !important;
+        border: 2px solid #e1e8ed !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
     }
 
-    .flow-node-content li {
-        padding: 3px 0;
+    .content .flow-chart-horizontal .flow-node-content ul {
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+        font-size: 0.9rem !important;
+        color: #666 !important;
     }
 
-    .flow-node-content li::before {
-        content: "• ";
-        color: #667eea;
+    .content .flow-chart-horizontal .flow-node-content li {
+        padding: 5px 0 !important;
+        border-bottom: 1px dashed #e1e8ed !important;
+    }
+
+    .content .flow-chart-horizontal .flow-node-content li:last-child {
+        border-bottom: none !important;
+    }
+
+    .content .flow-chart-horizontal .flow-node-content li::before {
+        content: "• " !important;
+        color: #667eea !important;
+    }
+
+    /* 移动端响应式设计 */
+    @media (max-width: 768px) {
+        .content .flow-chart-horizontal {
+            flex-wrap: wrap !important;
+            align-items: center !important;
+        }
+
+        .content .flow-chart-horizontal .flow-node {
+            min-width: calc(50% - 10px) !important;
+            margin-bottom: 30px !important;
+        }
+
+        .content .flow-chart-horizontal .flow-node:not(:last-child)::after {
+            content: "↓" !important;
+            position: absolute !important;
+            right: 50% !important;
+            top: 65px !important;
+            transform: translateX(50%) !important;
+        }
+
+        .content .flow-chart-horizontal .flow-node:nth-child(odd) {
+            margin-right: 5px !important;
+        }
+
+        .content .flow-chart-horizontal .flow-node:nth-child(even) {
+            margin-left: 5px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .content .flow-chart-horizontal {
+            flex-direction: column !important;
+            align-items: center !important;
+        }
+
+        .content .flow-chart-horizontal .flow-node {
+            min-width: 100% !important;
+            max-width: 300px !important;
+            margin: 20px 0 !important;
+        }
+
+        .content .flow-chart-horizontal .flow-node:not(:last-child)::after {
+            content: "↓" !important;
+            position: static !important;
+            transform: none !important;
+            margin: 10px auto !important;
+        }
     }
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>格式化代码测试2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px 20px;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 20px 0;
+            line-height: 1.8;
+            border: 2px solid #667eea;
+            position: relative;
+            white-space: pre; /* 保留空白符和换行 */
+        }
+
+        .code-block .comment { color: #6a9955; font-style: italic; }
+        .code-block .keyword { color: #569cd6; font-weight: 600; }
+        .code-block .string { color: #ce9178; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .variable { color: #9cdcfe; }
+    </style>
+</head>
+<body>
+    <h1>格式化代码测试2</h1>
+    
+    <div class="code-block"><span class="comment"># 签名算法实现详解</span>
+<span class="keyword">import</span> hmac
+<span class="keyword">import</span> hashlib
+
+<span class="comment"># 步骤1: 参数预处理</span>
+<span class="keyword">def</span> <span class="function">prepare_params</span>(raw_params):
+    <span class="comment"># 移除签名字段并按字典序排序</span>
+    clean_params = {k: v <span class="keyword">for</span> k, v <span class="keyword">in</span> raw_params.items() <span class="keyword">if</span> k != <span class="string">'sign'</span>}
+    <span class="keyword">return</span> <span class="function">sorted</span>(clean_params.items())
+
+<span class="comment"># 步骤2: 生成签名</span>
+<span class="keyword">def</span> <span class="function">generate_signature</span>(params, secret_key):
+    <span class="comment"># 按参数名排序</span>
+    sorted_params = <span class="function">prepare_params</span>(params)
+    
+    <span class="comment"># 拼接参数字符串</span>
+    param_str = <span class="string">"&"</span>.join([f<span class="string">"{k}={v}"</span> <span class="keyword">for</span> k, v <span class="keyword">in</span> sorted_params])
+    
+    <span class="comment"># 添加密钥并生成签名</span>
+    sign_str = f<span class="string">"{param_str}&key={secret_key}"</span>
+    
+    <span class="comment"># 使用HMAC-SHA256生成签名</span>
+    sign = hmac.<span class="function">new</span>(
+        secret_key.encode(<span class="string">'utf-8'</span>),
+        sign_str.encode(<span class="string">'utf-8'</span>),
+        hashlib.sha256
+    ).hexdigest().lower()  <span class="comment"># 转换为小写</span>
+    
+    <span class="keyword">return</span> sign
+
+<span class="comment"># 步骤3: 验证签名</span>
+<span class="keyword">def</span> <span class="function">verify_signature</span>(received_params, received_sign, secret_key):
+    <span class="comment"># 重新计算签名</span>
+    expected_sign = <span class="function">generate_signature</span>(received_params, secret_key)
+    
+    <span class="comment"># 安全比较（防止时序攻击）</span>
+    <span class="keyword">return</span> hmac.compare_digest(expected_sign, received_sign.lower())
+
+<span class="comment"># 使用示例</span>
+sample_params = {
+    <span class="string">"amount"</span>: <span class="string">"100.00"</span>,
+    <span class="string">"currency"</span>: <span class="string">"CNY"</span>,
+    <span class="string">"merchant_id"</span>: <span class="string">"M123456"</span>,
+    <span class="string">"order_id"</span>: <span class="string">"ORD20230101001"</span>,
+    <span class="string">"timestamp"</span>: <span class="string">"1672531200"</span>
+}
+api_secret = <span class="string">"your_super_secret_api_key_here"</span>
+
+calculated_signature = <span class="function">generate_signature</span>(sample_params, api_secret)
+<span class="function">print</span>(f<span class="string">"计算得到的签名: {calculated_signature}"</span>)
+
+<span class="comment"># 验证签名</span>
+is_valid = <span class="function">verify_signature</span>(sample_params, calculated_signature, api_secret)
+<span class="function">print</span>(f<span class="string">"签名是否有效: {is_valid}"</span>)
+    </div>
+</body>
+</html>

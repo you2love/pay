@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>格式化代码测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px 20px;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 20px 0;
+            line-height: 1.8;
+            border: 2px solid #667eea;
+            position: relative;
+            white-space: pre; /* 保留空白符和换行 */
+        }
+
+        .code-block .comment { color: #6a9955; font-style: italic; }
+        .code-block .keyword { color: #569cd6; font-weight: 600; }
+        .code-block .string { color: #ce9178; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .variable { color: #9cdcfe; }
+    </style>
+</head>
+<body>
+    <h1>格式化代码测试</h1>
+    
+    <div class="code-block"># 签名算法实现详解
+import hmac
+import hashlib
+
+# 步骤1: 参数预处理
+def prepare_params(raw_params):
+    # 移除签名字段并按字典序排序
+    clean_params = {k: v for k, v in raw_params.items() if k != 'sign'}
+    return sorted(clean_params.items())
+
+# 步骤2: 生成签名
+def generate_signature(params, secret_key):
+    # 按参数名排序
+    sorted_params = prepare_params(params)
+    
+    # 拼接参数字符串
+    param_str = "&".join([f"{k}={v}" for k, v in sorted_params])
+    
+    # 添加密钥并生成签名
+    sign_str = f"{param_str}&key={secret_key}"
+    
+    # 使用HMAC-SHA256生成签名
+    sign = hmac.new(
+        secret_key.encode('utf-8'),
+        sign_str.encode('utf-8'),
+        hashlib.sha256
+    ).hexdigest().lower()  # 转换为小写
+    
+    return sign
+
+# 步骤3: 验证签名
+def verify_signature(received_params, received_sign, secret_key):
+    # 重新计算签名
+    expected_sign = generate_signature(received_params, secret_key)
+    
+    # 安全比较（防止时序攻击）
+    return hmac.compare_digest(expected_sign, received_sign.lower())
+
+# 使用示例
+sample_params = {
+    "amount": "100.00",
+    "currency": "CNY",
+    "merchant_id": "M123456",
+    "order_id": "ORD20230101001",
+    "timestamp": "1672531200"
+}
+api_secret = "your_super_secret_api_key_here"
+
+calculated_signature = generate_signature(sample_params, api_secret)
+print(f"计算得到的签名: {calculated_signature}")
+
+# 验证签名
+is_valid = verify_signature(sample_params, calculated_signature, api_secret)
+print(f"签名是否有效: {is_valid}")
+    </div>
+</body>
+</html>

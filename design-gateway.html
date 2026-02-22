@@ -391,6 +391,438 @@ Content-Type: application/json
                 </div>
             </div>
 
+            <!-- ⭐⭐⭐ 核心难点与解决方案 ⭐⭐⭐ -->
+            <div class="content" style="border: 3px solid #ff6b00; border-radius: 16px; margin: 30px 0;">
+                <h2 style="color: #ff6b00;">🔥🔥🔥 核心难点与解决方案</h2>
+
+                <!-- 难点 1: 分布式事务 -->
+                <div class="content-section">
+                    <h3 style="color: #667eea; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">🔄</span> 1. 分布式事务一致性
+                    </h3>
+
+                    <div class="highlight-box warning" style="margin: 15px 0; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                        <div class="highlight-title warning-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>⚠️ 问题描述</span>
+                        </div>
+                        <p>支付涉及多个服务：订单服务、账户服务、通道服务，如何保证数据一致性？</p>
+                    </div>
+
+                    <!-- 解决方案 -->
+                    <div class="highlight-box info" style="margin: 20px 0; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>✅ 解决方案：TCC + 本地消息表</span>
+                        </div>
+                    </div>
+
+                    <div class="code-block" style="white-space: pre;">
+                        <pre><code>
+<span class="comment"># TCC 三阶段实现</span>
+<span class="keyword">class</span> <span class="function">PaymentService</span>:
+    
+    <span class="comment"># 阶段 1: Try - 资源预留</span>
+    <span class="keyword">def</span> <span class="function">try_payment</span>(self, order_id, amount):
+        <span class="comment"># 1. 冻结用户账户余额</span>
+        account_service.freeze_balance(order_id, amount)
+        <span class="comment"># 2. 创建支付记录（状态：TRYING）</span>
+        payment_record.create(status=<span class="string">"TRYING"</span>)
+        <span class="keyword">return</span> <span class="keyword">True</span>
+    
+    <span class="comment"># 阶段 2: Confirm - 确认提交</span>
+    <span class="keyword">def</span> <span class="function">confirm_payment</span>(self, order_id):
+        <span class="comment"># 1. 扣减已冻结的余额</span>
+        account_service.deduct_frozen(order_id)
+        <span class="comment"># 2. 更新支付记录（状态：SUCCESS）</span>
+        payment_record.update(order_id, status=<span class="string">"SUCCESS"</span>)
+    
+    <span class="comment"># 阶段 3: Cancel - 回滚取消</span>
+    <span class="keyword">def</span> <span class="function">cancel_payment</span>(self, order_id):
+        <span class="comment"># 1. 解冻账户余额</span>
+        account_service.unfreeze_balance(order_id)
+        <span class="comment"># 2. 更新支付记录（状态：CANCEL）</span>
+        payment_record.update(order_id, status=<span class="string">"CANCEL"</span>)
+                        </code></pre>
+                    </div>
+
+                    <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
+                        💡 核心：Try 阶段预留资源，Confirm/Cancel 幂等执行，支持自动重试
+                    </div>
+                </div>
+
+                <!-- 难点 2: 幂等性设计 -->
+                <div class="content-section">
+                    <h3 style="color: #11998e; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">🔁</span> 2. 接口幂等性设计
+                    </h3>
+
+                    <div class="highlight-box warning" style="margin: 15px 0; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                        <div class="highlight-title warning-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>⚠️ 问题描述</span>
+                        </div>
+                        <p>网络超时导致商户重试、回调重复通知，如何防止重复扣款？</p>
+                    </div>
+
+                    <!-- 幂等性方案 -->
+                    <div class="highlight-box info" style="margin: 20px 0; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>✅ 解决方案：唯一幂等键 + 数据库唯一索引</span>
+                        </div>
+                    </div>
+
+                    <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0;">
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                1
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                生成幂等键
+                            </div>
+                            <div class="flow-node-content" style="background: #f8f9fa; border-radius: 8px; padding: 12px; text-align: center; width: 100%; border: 1px solid #e1e8ed; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                <div style="font-size: 0.8rem; color: #666;">merchant_id + order_no</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                2
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                Redis 预检查
+                            </div>
+                            <div class="flow-node-content" style="background: #f8f9fa; border-radius: 8px; padding: 12px; text-align: center; width: 100%; border: 1px solid #e1e8ed; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                <div style="font-size: 0.8rem; color: #666;">SETNX 幂等键</div>
+                            </div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                3
+                            </div>
+                            <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                数据库约束
+                            </div>
+                            <div class="flow-node-content" style="background: #f8f9fa; border-radius: 8px; padding: 12px; text-align: center; width: 100%; border: 1px solid #e1e8ed; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                <div style="font-size: 0.8rem; color: #666;">UNIQUE 索引</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-block" style="white-space: pre;">
+                        <pre><code>
+<span class="comment"># 幂等性实现代码</span>
+<span class="keyword">def</span> <span class="function">create_payment</span>(self, request):
+    <span class="comment"># 生成幂等键</span>
+    idempotent_key = <span class="string">f"idem:{request.merchant_id}:{request.order_no}"</span>
+    
+    <span class="comment"># Redis 原子操作获取锁</span>
+    acquired = redis.set(idempotent_key, <span class="string">"1"</span>, nx=<span class="keyword">True</span>, ex=3600)
+    <span class="keyword">if not</span> acquired:
+        <span class="comment"># 已存在，返回之前的结果（幂等）</span>
+        <span class="keyword">return</span> self.get_previous_result(request.order_no)
+    
+    <span class="keyword">try</span>:
+        <span class="comment"># 数据库唯一索引兜底</span>
+        payment = Payment.objects.create(
+            merchant_id=request.merchant_id,
+            order_no=request.order_no,
+            amount=request.amount
+        )
+        <span class="keyword">return</span> self.process_payment(payment)
+    <span class="keyword">except</span> IntegrityError:
+        <span class="comment"># 唯一索引冲突，返回已存在的订单</span>
+        <span class="keyword">return</span> self.get_existing_payment(request.order_no)
+    <span class="keyword">finally</span>:
+        <span class="comment"># 释放锁（异步任务处理）</span>
+        pass
+                        </code></pre>
+                    </div>
+
+                    <div style="background: #fff3e0; border-left: 4px solid #ff6b00; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #e65100;">
+                        ⚠️ 关键：Redis 和数据库双重保障，防止并发重复请求
+                    </div>
+                </div>
+
+                <!-- 难点 3: 通道故障切换 -->
+                <div class="content-section">
+                    <h3 style="color: #f093fb; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">🔀</span> 3. 支付通道故障自动切换
+                    </h3>
+
+                    <div class="highlight-box warning" style="margin: 15px 0; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                        <div class="highlight-title warning-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>⚠️ 问题描述</span>
+                        </div>
+                        <p>某个银行通道宕机或响应超时，如何快速切换到备用通道，保证支付不中断？</p>
+                    </div>
+
+                    <!-- 解决方案 -->
+                    <div class="highlight-box info" style="margin: 20px 0; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>✅ 解决方案：熔断器 + 智能路由</span>
+                        </div>
+                    </div>
+
+                    <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0;">
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                📊
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                实时监控
+                            </div>
+                            <div class="flow-node-label" style="margin-top: 8px; font-size: 0.8rem; color: #666;">成功率/响应时间</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                ⚡
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                熔断触发
+                            </div>
+                            <div class="flow-node-label" style="margin-top: 8px; font-size: 0.8rem; color: #666;">失败率>50%</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                                🔄
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                自动切换
+                            </div>
+                            <div class="flow-node-label" style="margin-top: 8px; font-size: 0.8rem; color: #666;">路由到备用通道</div>
+                        </div>
+                        <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                        <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                            <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);">
+                                📈
+                            </div>
+                            <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                                半开探测
+                            </div>
+                            <div class="flow-node-label" style="margin-top: 8px; font-size: 0.8rem; color: #666;">定时恢复测试</div>
+                        </div>
+                    </div>
+
+                    <div class="code-block" style="white-space: pre;">
+                        <pre><code>
+<span class="comment"># 熔断器实现</span>
+<span class="keyword">class</span> <span class="function">CircuitBreaker</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, failure_threshold=5, recovery_timeout=60):
+        self.failure_count = 0
+        self.failure_threshold = failure_threshold
+        self.state = <span class="string">"CLOSED"</span>  <span class="comment"># CLOSED/OPEN/HALF_OPEN</span>
+        self.last_failure_time = <span class="keyword">None</span>
+        self.recovery_timeout = recovery_timeout
+    
+    <span class="keyword">def</span> <span class="function">execute</span>(self, channel, payment_func):
+        <span class="keyword">if</span> self.state == <span class="string">"OPEN"</span>:
+            <span class="comment"># 检查是否可以进入半开状态</span>
+            <span class="keyword">if</span> time.now() - self.last_failure_time > self.recovery_timeout:
+                self.state = <span class="string">"HALF_OPEN"</span>
+            <span class="keyword">else</span>:
+                <span class="keyword">raise</span> CircuitBreakerOpenError(<span class="string">"通道已熔断"</span>)
+        
+        <span class="keyword">try</span>:
+            result = payment_func()
+            <span class="keyword">if</span> self.state == <span class="string">"HALF_OPEN"</span>:
+                self.state = <span class="string">"CLOSED"</span>  <span class="comment"># 成功，恢复通道</span>
+                self.failure_count = 0
+            <span class="keyword">return</span> result
+        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+            self.failure_count += 1
+            self.last_failure_time = time.now()
+            <span class="keyword">if</span> self.failure_count >= self.failure_threshold:
+                self.state = <span class="string">"OPEN"</span>  <span class="comment"># 失败过多，打开熔断</span>
+            <span class="keyword">raise</span> e
+
+<span class="comment"># 智能路由选择</span>
+<span class="keyword">def</span> <span class="function">select_channel</span>(payment_request):
+    channels = get_available_channels(payment_request)
+    <span class="comment"># 按优先级排序：权重 > 成功率 > 响应时间</span>
+    sorted_channels = <span class="function">sorted</span>(
+        channels, 
+        key=<span class="keyword">lambda</span> c: (c.weight, c.success_rate, -c.avg_response_time),
+        reverse=<span class="keyword">True</span>
+    )
+    <span class="keyword">for</span> channel <span class="keyword">in</span> sorted_channels:
+        <span class="keyword">if</span> channel.circuit_breaker.state != <span class="string">"OPEN"</span>:
+            <span class="keyword">return</span> channel
+    <span class="keyword">raise</span> NoAvailableChannelError(<span class="string">"所有通道不可用"</span>)
+                        </code></pre>
+                    </div>
+
+                    <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
+                        💡 核心：熔断器三态转换（CLOSED→OPEN→HALF_OPEN），自动恢复机制
+                    </div>
+                </div>
+
+                <!-- 难点 4: 回调通知可靠性 -->
+                <div class="content-section">
+                    <h3 style="color: #ff6b6b; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">📢</span> 4. 回调通知可靠性保证
+                    </h3>
+
+                    <div class="highlight-box warning" style="margin: 15px 0; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                        <div class="highlight-title warning-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>⚠️ 问题描述</span>
+                        </div>
+                        <p>商户服务器宕机、网络异常导致回调失败，如何确保商户最终收到通知？</p>
+                    </div>
+
+                    <!-- 解决方案 -->
+                    <div class="highlight-box info" style="margin: 20px 0; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>✅ 解决方案：可靠消息队列 + 指数退避重试</span>
+                        </div>
+                    </div>
+
+                    <div class="code-block" style="white-space: pre;">
+                        <pre><code>
+<span class="comment"># 回调通知重试机制</span>
+<span class="keyword">class</span> <span class="function">NotifyService</span>:
+    <span class="comment"># 重试策略：指数退避</span>
+    RETRY_DELAYS = [1, 5, 30, 120, 600, 1800]  <span class="comment"># 秒</span>
+    MAX_RETRIES = 6
+    
+    <span class="keyword">def</span> <span class="function">send_notify</span>(self, order):
+        notify_record = NotifyRecord.create(
+            order_id=order.id,
+            notify_url=order.notify_url,
+            status=<span class="string">"PENDING"</span>
+        )
+        <span class="comment"># 发送到消息队列</span>
+        mq.send(<span class="string">"payment.notify"</span>, {
+            <span class="string">"order_id"</span>: order.id,
+            <span class="string">"notify_record_id"</span>: notify_record.id
+        })
+    
+    <span class="keyword">def</span> <span class="function">process_notify</span>(self, message):
+        notify_record = NotifyRecord.get(message.notify_record_id)
+        
+        <span class="keyword">for</span> attempt <span class="keyword">in</span> range(1, self.MAX_RETRIES + 1):
+            <span class="keyword">try</span>:
+                response = http.post(
+                    notify_record.notify_url,
+                    data=self.build_notify_data(notify_record),
+                    timeout=10
+                )
+                <span class="keyword">if</span> response.status_code == 200:
+                    notify_record.update(status=<span class="string">"SUCCESS"</span>)
+                    <span class="keyword">return</span>
+            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+                <span class="comment"># 记录失败日志</span>
+                notify_record.add_log(<span class="string">f"第{attempt}次失败：{e}"</span>)
+            
+            <span class="comment"># 等待下次重试（指数退避）</span>
+            <span class="keyword">if</span> attempt < self.MAX_RETRIES:
+                delay = self.RETRY_DELAYS[attempt - 1]
+                <span class="comment"># 加入随机抖动，避免雪崩</span>
+                jitter = random.uniform(0, delay * 0.2)
+                time.sleep(delay + jitter)
+        
+        <span class="comment"># 所有重试失败，标记为失败并告警</span>
+        notify_record.update(status=<span class="string">"FAILED"</span>)
+        alert_service.send(<span class="string">f"回调通知失败：{notify_record.order_id}"</span>)
+                        </code></pre>
+                    </div>
+
+                    <div style="background: #fce4ec; border-left: 4px solid #c2185b; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #880e4f;">
+                        📊 重试策略：1s → 5s → 30s → 2min → 10min → 30min，总计约 45 分钟
+                    </div>
+                </div>
+
+                <!-- 难点 5: 高并发性能优化 -->
+                <div class="content-section">
+                    <h3 style="color: #667eea; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5em;">⚡</span> 5. 高并发性能优化
+                    </h3>
+
+                    <div class="highlight-box warning" style="margin: 15px 0; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                        <div class="highlight-title warning-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>⚠️ 问题描述</span>
+                        </div>
+                        <p>大促期间 QPS 暴增 10 倍，如何保证系统不崩溃、响应不超时？</p>
+                    </div>
+
+                    <!-- 解决方案 -->
+                    <div class="highlight-box info" style="margin: 20px 0; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                        <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                            <span>✅ 解决方案：多层缓存 + 异步化 + 限流降级</span>
+                        </div>
+                    </div>
+
+                    <table class="api-table">
+                        <thead>
+                            <tr>
+                                <th>优化手段</th>
+                                <th>具体实现</th>
+                                <th>效果</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>多级缓存</strong></td><td>本地缓存 (Caffeine) + Redis</td><td>热点数据访问 < 1ms</td></tr>
+                            <tr><td><strong>异步处理</strong></td><td>非核心逻辑异步化（通知、记账）</td><td>主链路 RT 降低 60%</td></tr>
+                            <tr><td><strong>限流熔断</strong></td><td>令牌桶限流 + 自适应熔断</td><td>防止雪崩，保护系统</td></tr>
+                            <tr><td><strong>数据库优化</strong></td><td>读写分离 + 分库分表</td><td>支持 10 万 + TPS</td></tr>
+                            <tr><td><strong>连接池优化</strong></td><td>HikariCP + Redis 连接池</td><td>减少连接创建开销</td></tr>
+                            <tr><td><strong>批量处理</strong></td><td>批量查询/写入，减少 IO 次数</td><td>吞吐量提升 3 倍</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block" style="white-space: pre;">
+                        <pre><code>
+<span class="comment"># 多级缓存实现</span>
+<span class="keyword">class</span> <span class="function">CacheService</span>:
+    <span class="keyword">def</span> <span class="function">get_merchant_config</span>(self, merchant_id):
+        <span class="comment"># 1. 本地缓存（L1）</span>
+        config = local_cache.get(<span class="string">f"merchant:{merchant_id}"</span>)
+        <span class="keyword">if</span> config:
+            <span class="keyword">return</span> config
+        
+        <span class="comment"># 2. Redis 缓存（L2）</span>
+        config = redis.get(<span class="string">f"merchant:{merchant_id}"</span>)
+        <span class="keyword">if</span> config:
+            local_cache.set(<span class="string">f"merchant:{merchant_id}"</span>, config, ttl=60)
+            <span class="keyword">return</span> config
+        
+        <span class="comment"># 3. 数据库查询</span>
+        config = db.query(<span class="string">"SELECT * FROM merchant_config WHERE merchant_id = ?"</span>, merchant_id)
+        <span class="keyword">if</span> config:
+            redis.set(<span class="string">f"merchant:{merchant_id}"</span>, config, ex=300)
+            local_cache.set(<span class="string">f"merchant:{merchant_id}"</span>, config, ttl=60)
+        <span class="keyword">return</span> config
+
+<span class="comment"># 限流实现（令牌桶）</span>
+<span class="keyword">class</span> <span class="function">RateLimiter</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, capacity, refill_rate):
+        self.capacity = capacity  <span class="comment"># 桶容量</span>
+        self.tokens = capacity
+        self.refill_rate = refill_rate  <span class="comment"># 每秒补充令牌数</span>
+        self.last_refill = time.now()
+    
+    <span class="keyword">def</span> <span class="function">try_acquire</span>(self):
+        <span class="comment"># 补充令牌</span>
+        now = time.now()
+        elapsed = now - self.last_refill
+        self.tokens = min(self.capacity, self.tokens + elapsed * self.refill_rate)
+        self.last_refill = now
+        
+        <span class="keyword">if</span> self.tokens >= 1:
+            self.tokens -= 1
+            <span class="keyword">return</span> <span class="keyword">True</span>
+        <span class="keyword">return</span> <span class="keyword">False</span>  <span class="comment"># 限流</span>
+                        </code></pre>
+                    </div>
+
+                    <div style="background: #e8f5e9; border-left: 4px solid #43a047; padding: 15px; border-radius: 0 8px 8px 0; margin: 15px 0; font-weight: 500; color: #2e7d32;">
+                        💡 核心：80% 流量走缓存，20% 核心逻辑走数据库，异步处理非核心业务
+                    </div>
+                </div>
+            </div>
+
             <!-- 技术栈推荐 -->
             <div class="content">
                 <h2>🛠️ 技术栈推荐</h2>

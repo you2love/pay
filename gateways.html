@@ -23,6 +23,14 @@
     .string { color: #ce9178; }
     .comment { color: #6a9955; }
     .function { color: #dcdcaa; }
+    
+    /* 订单状态流转 - 限制宽度 */
+    .content .flow-chart-horizontal.flow-compact {
+        width: auto !important;
+        max-width: 650px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
     </style>
 </head>
 <body>
@@ -35,7 +43,7 @@
             <ul class="nav-menu">
                 <li><a href="index.html">首页</a></li>
                 <li><a href="gateways.html" class="active">支付网关</a></li>
-                <li><a href="simulator.html">支付模拟</a></li>
+                <li><a href="design-gateway.html">设计网关</a></li>
                 <li><a href="security.html">安全机制</a></li>
                 <li><a href="international-payment.html">跨境支付</a></li>
                 <li><a href="crypto-payment.html">加密支付</a></li>
@@ -470,7 +478,7 @@ is_valid = <span class="function">verify_signature</span>(sample_params, calcula
             <!-- 订单状态流转 -->
             <div class="content">
                 <h2>📋 订单状态流转</h2>
-                <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 30px 0; flex-wrap: nowrap; padding: 20px 0; width: 100%;">
+                <div class="flow-chart-horizontal flow-compact" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 30px 0; flex-wrap: nowrap; padding: 20px 0;">
                     <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
                         <div class="flow-node-status created" style="min-width: 100px; padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; background: #e3f2fd; color: #1565c0; border: 2px solid #1565c0;">
                             CREATED
@@ -499,9 +507,9 @@ is_valid = <span class="function">verify_signature</span>(sample_params, calcula
                         <div class="flow-node-label" style="margin-top: 8px; font-size: 0.9rem; color: #666;">已退款</div>
                     </div>
                 </div>
-                
+
                 <!-- 第二条状态流转路径 -->
-                <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 20px 0; flex-wrap: nowrap; padding: 10px 0; width: 100%;">
+                <div class="flow-chart-horizontal flow-compact" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 20px 0; flex-wrap: nowrap; padding: 10px 0;">
                     <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
                         <div class="flow-node-status wait" style="min-width: 100px; padding: 12px 16px; border-radius: 8px; font-weight: 600; text-align: center; background: #fff3e0; color: #e65100; border: 2px solid #e65100;">
                             WAIT_PAY

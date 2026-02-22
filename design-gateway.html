@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设计支付网关 - 支付学习网</title>
+    <link rel="stylesheet" href="css/style.css?v=1.1">
+    <style>
+        pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Monaco', monospace;
+      line-height: 1.5;
+    }
+    code {
+      font-family: inherit;
+    }
+    /* 简单颜色区分 */
+    .keyword { color: #569cd6; }
+    .string { color: #ce9178; }
+    .comment { color: #6a9955; }
+    .function { color: #dcdcaa; }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">💳 支付学习网</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="gateways.html">支付网关</a></li>
+                <li><a href="design-gateway.html" class="active">设计网关</a></li>
+                <li><a href="security.html">安全机制</a></li>
+                <li><a href="international-payment.html">跨境支付</a></li>
+                <li><a href="crypto-payment.html">加密支付</a></li>
+                <li><a href="cross-border-eCommerce.html">跨境电商</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <div class="page-header">
+        <div class="container">
+            <h1>🎨 设计支付网关</h1>
+            <p>从零开始构建企业级支付系统</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="container">
+            <!-- 核心架构 -->
+            <div class="content">
+                <h2>🏗️ 整体架构设计</h2>
+                <div class="architecture-diagram">
+                    <div class="component">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🌐</div>
+                        <div>商户接入层</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px; opacity: 0.8;">API Gateway</div>
+                    </div>
+                    <div class="connector">→</div>
+                    <div class="component component-core">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">⚙️</div>
+                        <div>支付核心引擎</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px; opacity: 0.8;">路由/风控/账务</div>
+                    </div>
+                    <div class="connector">→</div>
+                    <div class="component component-bank">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🏦</div>
+                        <div>银行通道层</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px; opacity: 0.8;">通道适配</div>
+                    </div>
+                    <div class="component-flow">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <span>📊 账务中心</span>
+                            <span>→</span>
+                            <span>🔒 安全中心</span>
+                            <span>→</span>
+                            <span>📈 数据中心</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设计原则 -->
+            <div class="content">
+                <h2>💡 核心设计原则</h2>
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-check">✓</div>
+                        <div>
+                            <h4>高可用性</h4>
+                            <p>99.99% SLA 保障，多活容灾设计，故障自动切换</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check">✓</div>
+                        <div>
+                            <h4>数据一致性</h4>
+                            <p>分布式事务保证，最终一致性，对账机制兜底</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check">✓</div>
+                        <div>
+                            <h4>安全合规</h4>
+                            <p>PCI DSS 认证，数据加密存储，敏感信息脱敏</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-check">✓</div>
+                        <div>
+                            <h4>可扩展性</h4>
+                            <p>微服务架构，支持水平扩容，新通道快速接入</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心模块 -->
+            <div class="content">
+                <h2>📦 核心模块设计</h2>
+                
+                <h3 style="color: #667eea; margin-top: 25px;">1️⃣ 订单中心</h3>
+                <p>负责订单的创建、状态管理、生命周期控制</p>
+                <div class="code-block" style="white-space: pre;">
+                    <pre><code>
+<span class="comment"># 订单表设计</span>
+<span class="keyword">CREATE TABLE</span> payment_order (
+    id              BIGINT PRIMARY KEY,
+    order_no        VARCHAR(32) UNIQUE <span class="keyword">NOT NULL</span>,  <span class="comment">商户订单号</span>
+    pay_order_no    VARCHAR(32) UNIQUE,           <span class="comment">支付订单号</span>
+    merchant_id     VARCHAR(32) <span class="keyword">NOT NULL</span>,         <span class="comment">商户 ID</span>
+    amount          DECIMAL(12,2) <span class="keyword">NOT NULL</span>,       <span class="comment">订单金额</span>
+    currency        VARCHAR(3) DEFAULT <span class="string">'CNY'</span>,    <span class="comment">币种</span>
+    status          TINYINT <span class="keyword">NOT NULL</span>,             <span class="comment">订单状态</span>
+    channel         VARCHAR(32),                  <span class="comment">支付通道</span>
+    create_time     DATETIME <span class="keyword">NOT NULL</span>,
+    update_time     DATETIME <span class="keyword">NOT NULL</span>,
+    expire_time     DATETIME,                     <span class="comment">过期时间</span>
+    <span class="keyword">INDEX</span> idx_merchant (merchant_id, create_time),
+    <span class="keyword">INDEX</span> idx_status (status, update_time)
+);
+                    </code></pre>
+                </div>
+
+                <h3 style="color: #f093fb; margin-top: 25px;">2️⃣ 支付路由</h3>
+                <p>智能选择最优支付通道，支持多策略路由</p>
+                <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0;">
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            📥
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                            请求接入
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            🎯
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                            规则匹配
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                            🔄
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                            通道选择
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 150px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);">
+                            📤
+                        </div>
+                        <div class="flow-node-title" style="font-size: 1rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                            路由下发
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #11998e; margin-top: 25px;">3️⃣ 通道适配层</h3>
+                <p>统一不同银行/支付机构的接口差异</p>
+                <div class="code-block" style="white-space: pre;">
+                    <pre><code>
+<span class="comment"># 通道适配器接口定义</span>
+<span class="keyword">class</span> <span class="function">PaymentChannelAdapter</span>:
+    <span class="keyword">def</span> <span class="function">create_order</span>(self, request) -> OrderResult:
+        <span class="string">"""创建支付订单"""</span>
+        <span class="keyword">pass</span>
+    
+    <span class="keyword">def</span> <span class="function">query_order</span>(self, order_no) -> QueryResult:
+        <span class="string">"""查询订单状态"""</span>
+        <span class="keyword">pass</span>
+    
+    <span class="keyword">def</span> <span class="function">refund</span>(self, refund_request) -> RefundResult:
+        <span class="string">"""退款处理"""</span>
+        <span class="keyword">pass</span>
+    
+    <span class="keyword">def</span> <span class="function">verify_callback</span>(self, callback_data) -> <span class="keyword">bool</span>:
+        <span class="string">"""验证回调签名"""</span>
+        <span class="keyword">pass</span>
+
+<span class="comment"># 支付宝适配器实现</span>
+<span class="keyword">class</span> <span class="function">AlipayAdapter</span>(PaymentChannelAdapter):
+    <span class="keyword">def</span> <span class="function">create_order</span>(self, request):
+        <span class="comment"># 调用支付宝 SDK</span>
+        <span class="keyword">return</span> alipay_client.trade_create(request)
+    
+    <span class="keyword">def</span> <span class="function">verify_callback</span>(self, callback_data):
+        <span class="comment"># 验证支付宝签名</span>
+        <span class="keyword">return</span> alipay_client.verify(callback_data)
+                    </code></pre>
+                </div>
+
+                <h3 style="color: #ff6b6b; margin-top: 25px;">4️⃣ 风控中心</h3>
+                <p>实时风险识别与拦截</p>
+                <div class="highlight-box warning" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                    <div class="highlight-title warning-title" style="display: flex; align-items: center; gap: 8px;">
+                        🛡️ 风控规则引擎
+                    </div>
+                    <ul style="margin: 10px 0 0 20px; padding: 0;">
+                        <li style="margin-bottom: 5px;">• <strong>黑名单检查</strong>：用户/商户/设备黑名单</li>
+                        <li style="margin-bottom: 5px;">• <strong>限额控制</strong>：单笔/单日/单月限额</li>
+                        <li style="margin-bottom: 5px;">• <strong>频次控制</strong>：单位时间内交易次数</li>
+                        <li style="margin-bottom: 5px;">• <strong>异常检测</strong>：异地支付、大额异常</li>
+                        <li>• <strong>智能评分</strong>：机器学习模型实时评分</li>
+                    </ul>
+                </div>
+
+                <h3 style="color: #667eea; margin-top: 25px;">5️⃣ 对账中心</h3>
+                <p>确保资金安全，发现并处理差异</p>
+                <div class="flow-chart-horizontal" style="display: flex; align-items: center; justify-content: center; gap: 5px; margin: 25px 0; flex-wrap: nowrap; padding: 20px 0;">
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            📥
+                        </div>
+                        <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                            获取账单
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            ⚖️
+                        </div>
+                        <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                            数据比对
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                            ⚠️
+                        </div>
+                        <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                            差异处理
+                        </div>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #667eea; margin: 0 5px;">→</div>
+                    <div class="flow-node" style="display: flex; flex-direction: column; align-items: center; min-width: 120px; position: relative; margin: 10px; flex: none; text-align: center; background: transparent; padding: 0; border: none; box-shadow: none;">
+                        <div class="flow-node-circle" style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 2; position: relative; background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);">
+                            ✅
+                        </div>
+                        <div class="flow-node-title" style="font-size: 0.9rem; font-weight: 600; color: #2c3e50; margin-bottom: 8px; text-align: center;">
+                            平账完成
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 数据库设计 -->
+            <div class="content">
+                <h2>🗄️ 核心表设计</h2>
+                
+                <h3 style="color: #667eea; margin-top: 25px;">支付流水表</h3>
+                <div class="code-block" style="white-space: pre;">
+                    <pre><code>
+<span class="keyword">CREATE TABLE</span> payment_flow (
+    id              BIGINT PRIMARY KEY,
+    flow_no         VARCHAR(32) UNIQUE <span class="keyword">NOT NULL</span>,  <span class="comment">流水号</span>
+    order_no        VARCHAR(32) <span class="keyword">NOT NULL</span>,         <span class="comment">关联订单号</span>
+    merchant_id     VARCHAR(32) <span class="keyword">NOT NULL</span>,
+    channel         VARCHAR(32) <span class="keyword">NOT NULL</span>,         <span class="comment">支付通道</span>
+    channel_order_no VARCHAR(64),                 <span class="comment">通道订单号</span>
+    amount          DECIMAL(12,2) <span class="keyword">NOT NULL</span>,
+    fee             DECIMAL(10,2) DEFAULT 0,      <span class="comment">手续费</span>
+    status          TINYINT <span class="keyword">NOT NULL</span>,             <span class="comment">SUCCESS/FAIL/PROCESSING</span>
+    error_code      VARCHAR(32),                  <span class="comment">错误码</span>
+    error_msg       VARCHAR(512),                 <span class="comment">错误信息</span>
+    request_data    TEXT,                         <span class="comment">请求报文</span>
+    response_data   TEXT,                         <span class="comment">响应报文</span>
+    create_time     DATETIME <span class="keyword">NOT NULL</span>,
+    complete_time   DATETIME,
+    <span class="keyword">INDEX</span> idx_order (order_no),
+    <span class="keyword">INDEX</span> idx_channel (channel, create_time)
+);
+                    </code></pre>
+                </div>
+
+                <h3 style="color: #f093fb; margin-top: 25px;">商户配置表</h3>
+                <div class="code-block" style="white-space: pre;">
+                    <pre><code>
+<span class="keyword">CREATE TABLE</span> merchant_config (
+    id              BIGINT PRIMARY KEY,
+    merchant_id     VARCHAR(32) UNIQUE <span class="keyword">NOT NULL</span>,
+    merchant_name   VARCHAR(128) <span class="keyword">NOT NULL</span>,
+    api_key         VARCHAR(64) UNIQUE <span class="keyword">NOT NULL</span>,  <span class="comment">API 密钥</span>
+    secret_key      VARCHAR(128) <span class="keyword">NOT NULL</span>,        <span class="comment">签名密钥</span>
+    notify_url      VARCHAR(256),                 <span class="comment">回调地址</span>
+    status          TINYINT <span class="keyword">NOT NULL</span>,             <span class="comment">启用/禁用</span>
+    rate            DECIMAL(5,4) DEFAULT 0.006,   <span class="comment">费率</span>
+    settle_mode     TINYINT DEFAULT 1,            <span class="comment">结算模式</span>
+    create_time     DATETIME <span class="keyword">NOT NULL</span>,
+    update_time     DATETIME <span class="keyword">NOT NULL</span>
+);
+                    </code></pre>
+                </div>
+
+                <h3 style="color: #11998e; margin-top: 25px;">通道配置表</h3>
+                <div class="code-block" style="white-space: pre;">
+                    <pre><code>
+<span class="keyword">CREATE TABLE</span> channel_config (
+    id              BIGINT PRIMARY KEY,
+    channel_code    VARCHAR(32) UNIQUE <span class="keyword">NOT NULL</span>,  <span class="comment">通道编码</span>
+    channel_name    VARCHAR(64) <span class="keyword">NOT NULL</span>,
+    provider        VARCHAR(64) <span class="keyword">NOT NULL</span>,         <span class="comment">提供方</span>
+    config_data     JSON <span class="keyword">NOT NULL</span>,                <span class="comment">通道配置</span>
+    status          TINYINT <span class="keyword">NOT NULL</span>,             <span class="comment">启用/禁用</span>
+    weight          INT DEFAULT 100,              <span class="comment">路由权重</span>
+    daily_limit     DECIMAL(15,2),                <span class="comment">日限额</span>
+    single_limit    DECIMAL(12,2),                <span class="comment">单笔限额</span>
+    support_methods JSON,                         <span class="comment">支持的支付方式</span>
+    create_time     DATETIME <span class="keyword">NOT NULL</span>
+);
+                    </code></pre>
+                </div>
+            </div>
+
+            <!-- 接口设计 -->
+            <div class="content">
+                <h2>📡 核心 API 设计</h2>
+                
+                <div class="highlight-box info" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                    <div class="highlight-title info-title" style="display: flex; align-items: center; gap: 8px;">
+                        <span>🌐 统一支付接口</span>
+                    </div>
+                </div>
+                <div class="code-block" style="white-space: pre;">
+                    <pre><code>
+<span class="comment"># 请求示例</span>
+POST /api/v1/payment/pay
+Content-Type: application/json
+
+{
+    <span class="string">"merchant_id"</span>: <span class="string">"M20240101001"</span>,
+    <span class="string">"order_no"</span>: <span class="string">"ORD20240101123456"</span>,
+    <span class="string">"amount"</span>: <span class="string">"100.00"</span>,
+    <span class="string">"currency"</span>: <span class="string">"CNY"</span>,
+    <span class="string">"subject"</span>: <span class="string">"商品描述"</span>,
+    <span class="string">"body"</span>: <span class="string">"商品详情"</span>,
+    <span class="string">"notify_url"</span>: <span class="string">"https://merchant.com/notify"</span>,
+    <span class="string">"return_url"</span>: <span class="string">"https://merchant.com/return"</span>,
+    <span class="string">"pay_method"</span>: <span class="string">"ALIPAY"</span>,
+    <span class="string">"timestamp"</span>: <span class="string">"1704067200"</span>,
+    <span class="string">"sign"</span>: <span class="string">"abc123..."</span>
+}
+
+<span class="comment"># 响应示例</span>
+{
+    <span class="string">"code"</span>: <span class="string">"SUCCESS"</span>,
+    <span class="string">"message"</span>: <span class="string">"success"</span>,
+    <span class="string">"data"</span>: {
+        <span class="string">"pay_order_no"</span>: <span class="string">"P20240101123456"</span>,
+        <span class="string">"pay_url"</span>: <span class="string">"https://pay.gateway.com/h5/xxx"</span>,
+        <span class="string">"qr_code"</span>: <span class="string">"data:image/png;base64,..."</span>
+    }
+}
+                    </code></pre>
+                </div>
+            </div>
+
+            <!-- 技术栈推荐 -->
+            <div class="content">
+                <h2>🛠️ 技术栈推荐</h2>
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>层次</th>
+                            <th>技术选型</th>
+                            <th>说明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>接入层</strong></td><td>Nginx + Kong</td><td>负载均衡、限流、鉴权</td></tr>
+                        <tr><td><strong>网关层</strong></td><td>Spring Cloud Gateway</td><td>路由、熔断、降级</td></tr>
+                        <tr><td><strong>服务层</strong></td><td>Spring Boot + Dubbo</td><td>微服务架构</td></tr>
+                        <tr><td><strong>数据库</strong></td><td>MySQL + Redis</td><td>关系型 + 缓存</td></tr>
+                        <tr><td><strong>消息队列</strong></td><td>RocketMQ / Kafka</td><td>异步解耦、削峰</td></tr>
+                        <tr><td><strong>监控</strong></td><td>Prometheus + Grafana</td><td>指标监控、告警</td></tr>
+                        <tr><td><strong>链路追踪</strong></td><td>SkyWalking</td><td>全链路追踪</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 部署架构 -->
+            <div class="content">
+                <h2>🚀 部署架构</h2>
+                <div class="architecture-diagram">
+                    <div class="component">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">☁️</div>
+                        <div>可用区 A</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px; opacity: 0.8;">主活</div>
+                    </div>
+                    <div class="connector">⇄</div>
+                    <div class="component component-core">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">🔄</div>
+                        <div>双活同步</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px; opacity: 0.8;">数据实时复制</div>
+                    </div>
+                    <div class="connector">⇄</div>
+                    <div class="component">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">☁️</div>
+                        <div>可用区 B</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px; opacity: 0.8;">备活</div>
+                    </div>
+                    <div class="component-flow">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <span>📊 多活容灾</span>
+                            <span>→</span>
+                            <span>⚡ 故障切换 &lt; 30s</span>
+                            <span>→</span>
+                            <span>💾 数据零丢失</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer><div class="container"></div></footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
